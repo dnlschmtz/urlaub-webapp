@@ -8,20 +8,21 @@ const app = opine();
 const __dir = dirname(import.meta.url);
 
 
-app.use(serveStatic(join(__dir, "public")));
-app.use(serveStatic(join(__dir, "public", "css")));
+app.use(serveStatic(join(__dir, "../public")));
+app.use(serveStatic(join(__dir, "../public", "css")));
 
-app.use("/static", serveStatic(join(__dir, "public")));
+app.use("/static", serveStatic(join(__dir, "../public")));
 
-/*
+
 app.get("/", function (req, res) {
-  res.send("<head><link </head>Hello World");
+  res.send("Hello World");
 });
-*/
+
 
 app.listen(
   3000,
   () => console.log("server has started on http://localhost:3000 🚀"),
 );
+
 
 export { app };
