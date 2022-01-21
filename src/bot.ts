@@ -8,6 +8,12 @@ const bot = new TelegramBot(TOKEN);
 bot.on(UpdateType.Message, async (message: any) => {
 
     const text = message.message.text || "I can't hear you";
+    console.log(text);
+
+    if(!text.startsWith("newGroup")) {
+        await bot.sendMessage({ chat_id: message.message.chat.id, text: `Unbekannter Befehl ${text}. Du kannst eine neue Gruppe mit newGroup erstellen.` })
+        return;
+    }
 
     await bot.sendMessage({ chat_id: message.message.chat.id, text: `echo ${text}` })
 
