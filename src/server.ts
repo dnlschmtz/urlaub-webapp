@@ -9,7 +9,7 @@ const __dir = dirname(import.meta.url);
 
 
 app.use(serveStatic(join(__dir, "../public")));
-app.use(serveStatic(join(__dir, "../public", "css")));
+app.use(serveStatic(join(__dir, "../build")));
 
 app.use("/static", serveStatic(join(__dir, "../public")));
 
