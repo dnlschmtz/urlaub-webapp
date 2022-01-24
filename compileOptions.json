@@ -1,0 +1,5 @@
+{
+    "generate": "dom",
+    "sveltePath": "https://cdn.skypack.dev/svelte@3.44.1",
+    "hydratable": true,
+  }

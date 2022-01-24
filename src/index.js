@@ -1,0 +1,1 @@
+// This is a placeholder for rendering the svelte files after running NOVA build in the root directory.
