@@ -20,8 +20,8 @@ export function createTelegramBot(token: string) {
             await bot.sendMessage({ chat_id: message.message.chat.id, text: `Neu Gruppe ${antwort} erstellt` })
             return;
         }
-        if(text.startsWith("help")) {
-            await bot.sendMessage({ chat_id: message.message.chat.id, text: `echo ${text}` })
+        if(text.startsWith("Help")) {
+            await bot.sendMessage({ chat_id: message.message.chat.id, text: `Schreibe: \nNewGroup \nHelp` })
             return;
         }
 
