@@ -12,7 +12,11 @@ export function createTelegramBot(token: string) {
 
         if(text.startsWith("newGroup")) {
             let antwort = text.replace("newGroup", "");
-            console.log(antwort);
+            await bot.sendMessage({ chat_id: message.message.chat.id, text: `Neu Gruppe ${antwort} erstellt` })
+            return;
+        }
+        if(text.startsWith("NewGroup")) {
+            let antwort = text.replace("NewGroup", "");
             await bot.sendMessage({ chat_id: message.message.chat.id, text: `Neu Gruppe ${antwort} erstellt` })
             return;
         }
