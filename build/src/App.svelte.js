@@ -4,188 +4,170 @@ import {
 	append_hydration,
 	append_styles,
 	attr,
+	binding_callbacks,
 	children,
 	claim_element,
 	claim_space,
-	claim_text,
+	create_slot,
 	detach,
 	element,
+	get_all_dirty_from_scope,
+	get_slot_changes,
 	init,
 	insert_hydration,
-	listen,
-	noop,
-	run_all,
+	query_selector_all,
 	safe_not_equal,
-	set_data,
 	space,
 	src_url_equal,
-	text
+	transition_in,
+	transition_out,
+	update_slot_base
 } from "https://cdn.skypack.dev/svelte@3.44.1/internal";
 
+import { setContext, onMount } from 'https://cdn.skypack.dev/svelte@3.44.1/internal';
+
 function add_css(target) {
-	append_styles(target, "svelte-1ewatvu", "body{margin:0px;background-color:#fe2}.counter.svelte-1ewatvu{display:flex;flex-direction:column;align-items:center;height:100vh;width:100vw}.app-name.svelte-1ewatvu{font-size:40px;font-weight:bold}img.svelte-1ewatvu{max-height:25px}.github-container.svelte-1ewatvu{display:flex;align-items:center}");
+	append_styles(target, "svelte-17lvefe", "body{margin:0px}.map.svelte-17lvefe{width:100%;max-width:980px;height:420px;margin:auto}");
 }
 
 function create_fragment(ctx) {
-	let div1;
-	let p0;
-	let t0;
-	let t1;
-	let p1;
-	let t2;
-	let t3;
-	let t4;
-	let t5_value = (/*count*/ ctx[0] === 1 ? 'time' : 'times') + "";
-	let t5;
-	let t6;
-	let button0;
-	let t7;
-	let t8;
-	let button1;
-	let t9;
-	let t10;
-	let div0;
-	let img;
-	let img_src_value;
-	let t11;
-	let a;
-	let t12;
-	let mounted;
-	let dispose;
+	let link;
+	let script;
+	let script_src_value;
+	let t;
+	let div;
+	let current;
+	const default_slot_template = /*#slots*/ ctx[2].default;
+	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[1], null);
 
 	return {
 		c() {
-			div1 = element("div");
-			p0 = element("p");
-			t0 = text("NOVAS");
-			t1 = space();
-			p1 = element("p");
-			t2 = text("You clicked ");
-			t3 = text(/*count*/ ctx[0]);
-			t4 = space();
-			t5 = text(t5_value);
-			t6 = space();
-			button0 = element("button");
-			t7 = text("Increment count");
-			t8 = space();
-			button1 = element("button");
-			t9 = text("Decrement count");
-			t10 = space();
-			div0 = element("div");
-			img = element("img");
-			t11 = space();
-			a = element("a");
-			t12 = text("Github");
+			link = element("link");
+			script = element("script");
+			t = space();
+			div = element("div");
+			if (default_slot) default_slot.c();
 			this.h();
 		},
 		l(nodes) {
-			div1 = claim_element(nodes, "DIV", { class: true });
-			var div1_nodes = children(div1);
-			p0 = claim_element(div1_nodes, "P", { class: true });
-			var p0_nodes = children(p0);
-			t0 = claim_text(p0_nodes, "NOVAS");
-			p0_nodes.forEach(detach);
-			t1 = claim_space(div1_nodes);
-			p1 = claim_element(div1_nodes, "P", {});
-			var p1_nodes = children(p1);
-			t2 = claim_text(p1_nodes, "You clicked ");
-			t3 = claim_text(p1_nodes, /*count*/ ctx[0]);
-			t4 = claim_space(p1_nodes);
-			t5 = claim_text(p1_nodes, t5_value);
-			p1_nodes.forEach(detach);
-			t6 = claim_space(div1_nodes);
-			button0 = claim_element(div1_nodes, "BUTTON", {});
-			var button0_nodes = children(button0);
-			t7 = claim_text(button0_nodes, "Increment count");
-			button0_nodes.forEach(detach);
-			t8 = claim_space(div1_nodes);
-			button1 = claim_element(div1_nodes, "BUTTON", {});
-			var button1_nodes = children(button1);
-			t9 = claim_text(button1_nodes, "Decrement count");
-			button1_nodes.forEach(detach);
-			t10 = claim_space(div1_nodes);
-			div0 = claim_element(div1_nodes, "DIV", { class: true });
-			var div0_nodes = children(div0);
-			img = claim_element(div0_nodes, "IMG", { src: true, alt: true, class: true });
-			t11 = claim_space(div0_nodes);
-			a = claim_element(div0_nodes, "A", { class: true, href: true });
-			var a_nodes = children(a);
-			t12 = claim_text(a_nodes, "Github");
-			a_nodes.forEach(detach);
-			div0_nodes.forEach(detach);
-			div1_nodes.forEach(detach);
+			const head_nodes = query_selector_all('[data-svelte=\"svelte-2nusob\"]', document.head);
+
+			link = claim_element(head_nodes, "LINK", {
+				rel: true,
+				href: true,
+				integrity: true,
+				crossorigin: true
+			});
+
+			script = claim_element(head_nodes, "SCRIPT", {
+				src: true,
+				integrity: true,
+				crossorigin: true
+			});
+
+			var script_nodes = children(script);
+			script_nodes.forEach(detach);
+			head_nodes.forEach(detach);
+			t = claim_space(nodes);
+			div = claim_element(nodes, "DIV", { class: true, id: true });
+			var div_nodes = children(div);
+			if (default_slot) default_slot.l(div_nodes);
+			div_nodes.forEach(detach);
 			this.h();
 		},
 		h() {
-			attr(p0, "class", "app-name svelte-1ewatvu");
-			if (!src_url_equal(img.src, img_src_value = src)) attr(img, "src", img_src_value);
-			attr(img, "alt", "github logo");
-			attr(img, "class", "svelte-1ewatvu");
-			attr(a, "class", "Github");
-			attr(a, "href", "https://github.com/NOVASland/NOVAS");
-			attr(div0, "class", "github-container svelte-1ewatvu");
-			attr(div1, "class", "counter svelte-1ewatvu");
+			attr(link, "rel", "stylesheet");
+			attr(link, "href", "https://unpkg.com/leaflet@1.7.1/dist/leaflet.css");
+			attr(link, "integrity", "sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==");
+			attr(link, "crossorigin", "");
+			if (!src_url_equal(script.src, script_src_value = "https://unpkg.com/leaflet@1.7.1/dist/leaflet.js")) attr(script, "src", script_src_value);
+			attr(script, "integrity", "sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==");
+			attr(script, "crossorigin", "");
+			attr(div, "class", "map svelte-17lvefe");
+			attr(div, "id", "map");
 		},
 		m(target, anchor) {
-			insert_hydration(target, div1, anchor);
-			append_hydration(div1, p0);
-			append_hydration(p0, t0);
-			append_hydration(div1, t1);
-			append_hydration(div1, p1);
-			append_hydration(p1, t2);
-			append_hydration(p1, t3);
-			append_hydration(p1, t4);
-			append_hydration(p1, t5);
-			append_hydration(div1, t6);
-			append_hydration(div1, button0);
-			append_hydration(button0, t7);
-			append_hydration(div1, t8);
-			append_hydration(div1, button1);
-			append_hydration(button1, t9);
-			append_hydration(div1, t10);
-			append_hydration(div1, div0);
-			append_hydration(div0, img);
-			append_hydration(div0, t11);
-			append_hydration(div0, a);
-			append_hydration(a, t12);
+			append_hydration(document.head, link);
+			append_hydration(document.head, script);
+			insert_hydration(target, t, anchor);
+			insert_hydration(target, div, anchor);
 
-			if (!mounted) {
-				dispose = [
-					listen(button0, "click", /*handleClick*/ ctx[1]),
-					listen(button1, "click", /*resetCount*/ ctx[2])
-				];
-
-				mounted = true;
+			if (default_slot) {
+				default_slot.m(div, null);
 			}
+
+			/*div_binding*/ ctx[3](div);
+			current = true;
 		},
 		p(ctx, [dirty]) {
-			if (dirty & /*count*/ 1) set_data(t3, /*count*/ ctx[0]);
-			if (dirty & /*count*/ 1 && t5_value !== (t5_value = (/*count*/ ctx[0] === 1 ? 'time' : 'times') + "")) set_data(t5, t5_value);
+			if (default_slot) {
+				if (default_slot.p && (!current || dirty & /*$$scope*/ 2)) {
+					update_slot_base(
+						default_slot,
+						default_slot_template,
+						ctx,
+						/*$$scope*/ ctx[1],
+						!current
+						? get_all_dirty_from_scope(/*$$scope*/ ctx[1])
+						: get_slot_changes(default_slot_template, /*$$scope*/ ctx[1], dirty, null),
+						null
+					);
+				}
+			}
 		},
-		i: noop,
-		o: noop,
+		i(local) {
+			if (current) return;
+			transition_in(default_slot, local);
+			current = true;
+		},
+		o(local) {
+			transition_out(default_slot, local);
+			current = false;
+		},
 		d(detaching) {
-			if (detaching) detach(div1);
-			mounted = false;
-			run_all(dispose);
+			detach(link);
+			detach(script);
+			if (detaching) detach(t);
+			if (detaching) detach(div);
+			if (default_slot) default_slot.d(detaching);
+			/*div_binding*/ ctx[3](null);
 		}
 	};
 }
 
-const src = 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png';
-
 function instance($$self, $$props, $$invalidate) {
-	let count = 0;
+	let { $$slots: slots = {}, $$scope } = $$props;
+	const markerLoc = [[49.4887, 8.4658]];
+	const initialView = [49.4887, 8.4658];
+	let mapContainer;
+	let map = L.map(L.DomUtil.crete("div"), { center: initialView, zoom: 7 });
+	setContext("leafletMapInstance", map);
+	console.log("map", map);
 
-	function handleClick() {
-		$$invalidate(0, count += 1);
+	L.tileLayer("https://a.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+		maxZoom: 18
+	}).addTo(map);
+
+	onMount(() => {
+		mapContainer.appendChild(map.getContainer());
+		map.getContainer().style.width = "100%";
+		map.getContainer().style.height = "100%";
+		map.invalidateSize();
+	});
+
+	function div_binding($$value) {
+		binding_callbacks[$$value ? 'unshift' : 'push'](() => {
+			mapContainer = $$value;
+			$$invalidate(0, mapContainer);
+		});
 	}
 
-	const resetCount = () => {
-		$$invalidate(0, count -= 1);
+	$$self.$$set = $$props => {
+		if ('$$scope' in $$props) $$invalidate(1, $$scope = $$props.$$scope);
 	};
 
-	return [count, handleClick, resetCount];
+	return [mapContainer, $$scope, slots, div_binding];
 }
 
 class Component extends SvelteComponent {

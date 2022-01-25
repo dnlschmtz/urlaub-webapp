@@ -1,59 +1,58 @@
 <script>
-let count = 0;
+    // import Map from "./components/MapView.svelte";
+    // import "https://unpkg.com/leaflet@1.7.1/dist/leaflet.js";
+    import { setContext, onMount } from "svelte";
 
-function handleClick() {
-  count += 1;
-}
+    const markerLoc = [
+        [49.4887, 8.4658]
+    ];
 
-const resetCount = () => {
-  count -= 1;
-}
-const src = 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'
+    const initialView = [49.4887, 8.4658];
+
+    let mapContainer;
+    let map = L.map(L.DomUtil.crete("div"), {
+        center: initialView,
+        zoom: 7,
+    });
+
+    setContext("leafletMapInstance", map);
+    console.log("map", map);
+
+    L.tileLayer("https://a.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            attribution:
+                'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+            maxZoom: 18,
+        }).addTo(map);
+
+    onMount(() => {
+        mapContainer.appendChild(map.getContainer());
+        map.getContainer().style.width = "100%";
+        map.getContainer().style.height = "100%";
+        map.invalidateSize();
+    });
 </script>
 
+
 <style>
-:global(body) {
-  margin: 0px;
-  background-color: #fe2;
-}
-.counter {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100vh;
-  width: 100vw;
-}
-.app-name {
-  font-size: 40px;
-  font-weight: bold;
-}
-img {
-  max-height: 25px;
-}
-.github-container {
-  display: flex;
-  align-items: center;
-}
+    :global(body) {
+        margin: 0px;
+    }
+
+    .map {
+      width: 100%;
+      max-width: 980px;
+      height: 420px;
+      margin: auto;
+    }
 </style>
 
-<div class="counter">
-<p class="app-name">
-  NOVAS
-</p>
-<p>
-  You clicked {count} {count === 1 ? 'time' : 'times'}
-</p>
-<button  on:click={handleClick}>
-  Increment count
-</button>
-<button on:click={resetCount}>
-  Decrement count
-</button>
-<div class='github-container'>
-  <img {src} alt='github logo'>
-  <a class='Github' href='https://github.com/NOVASland/NOVAS'>
-    Github
-  </a>
-</div>
 
+<svelte:head>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+</svelte:head>
+
+
+<div class="map" id="map" bind:this="{mapContainer}">
+    <slot></slot>
 </div>
