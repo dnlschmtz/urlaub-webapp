@@ -11,7 +11,9 @@ export function createTelegramBot(token: string) {
         console.log(text);
 
         if(text.startsWith("newGroup")) {
-            await bot.sendMessage({ chat_id: message.message.chat.id, text: `echo ${text}` })
+            let antwort = text.replace("newGroup", "");
+            console.log(antwort);
+            await bot.sendMessage({ chat_id: message.message.chat.id, text: `Neu Gruppe ${antwort} erstellt` })
             return;
         }
         if(text.startsWith("help")) {
