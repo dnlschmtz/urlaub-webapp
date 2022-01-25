@@ -4,24 +4,18 @@ import {
 	append_hydration,
 	append_styles,
 	attr,
-	binding_callbacks,
 	children,
 	claim_element,
 	claim_space,
-	create_slot,
 	detach,
 	element,
-	get_all_dirty_from_scope,
-	get_slot_changes,
 	init,
 	insert_hydration,
+	noop,
 	query_selector_all,
 	safe_not_equal,
 	space,
-	src_url_equal,
-	transition_in,
-	transition_out,
-	update_slot_base
+	src_url_equal
 } from "https://cdn.skypack.dev/svelte@3.44.1/internal";
 
 import { setContext, onMount } from 'https://cdn.skypack.dev/svelte@3.44.1/internal';
@@ -31,143 +25,65 @@ function add_css(target) {
 }
 
 function create_fragment(ctx) {
-	let link;
 	let script;
 	let script_src_value;
 	let t;
 	let div;
-	let current;
-	const default_slot_template = /*#slots*/ ctx[2].default;
-	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[1], null);
 
 	return {
 		c() {
-			link = element("link");
 			script = element("script");
 			t = space();
 			div = element("div");
-			if (default_slot) default_slot.c();
 			this.h();
 		},
 		l(nodes) {
-			const head_nodes = query_selector_all('[data-svelte=\"svelte-2nusob\"]', document.head);
-
-			link = claim_element(head_nodes, "LINK", {
-				rel: true,
-				href: true,
-				integrity: true,
-				crossorigin: true
-			});
-
-			script = claim_element(head_nodes, "SCRIPT", {
-				src: true,
-				integrity: true,
-				crossorigin: true
-			});
-
+			const head_nodes = query_selector_all('[data-svelte=\"svelte-1azydi2\"]', document.head);
+			script = claim_element(head_nodes, "SCRIPT", { src: true });
 			var script_nodes = children(script);
 			script_nodes.forEach(detach);
 			head_nodes.forEach(detach);
 			t = claim_space(nodes);
 			div = claim_element(nodes, "DIV", { class: true, id: true });
-			var div_nodes = children(div);
-			if (default_slot) default_slot.l(div_nodes);
-			div_nodes.forEach(detach);
+			children(div).forEach(detach);
 			this.h();
 		},
 		h() {
-			attr(link, "rel", "stylesheet");
-			attr(link, "href", "https://unpkg.com/leaflet@1.7.1/dist/leaflet.css");
-			attr(link, "integrity", "sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==");
-			attr(link, "crossorigin", "");
-			if (!src_url_equal(script.src, script_src_value = "https://unpkg.com/leaflet@1.7.1/dist/leaflet.js")) attr(script, "src", script_src_value);
-			attr(script, "integrity", "sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==");
-			attr(script, "crossorigin", "");
+			if (!src_url_equal(script.src, script_src_value = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js")) attr(script, "src", script_src_value);
 			attr(div, "class", "map svelte-17lvefe");
 			attr(div, "id", "map");
 		},
 		m(target, anchor) {
-			append_hydration(document.head, link);
 			append_hydration(document.head, script);
 			insert_hydration(target, t, anchor);
 			insert_hydration(target, div, anchor);
-
-			if (default_slot) {
-				default_slot.m(div, null);
-			}
-
-			/*div_binding*/ ctx[3](div);
-			current = true;
 		},
-		p(ctx, [dirty]) {
-			if (default_slot) {
-				if (default_slot.p && (!current || dirty & /*$$scope*/ 2)) {
-					update_slot_base(
-						default_slot,
-						default_slot_template,
-						ctx,
-						/*$$scope*/ ctx[1],
-						!current
-						? get_all_dirty_from_scope(/*$$scope*/ ctx[1])
-						: get_slot_changes(default_slot_template, /*$$scope*/ ctx[1], dirty, null),
-						null
-					);
-				}
-			}
-		},
-		i(local) {
-			if (current) return;
-			transition_in(default_slot, local);
-			current = true;
-		},
-		o(local) {
-			transition_out(default_slot, local);
-			current = false;
-		},
+		p: noop,
+		i: noop,
+		o: noop,
 		d(detaching) {
-			detach(link);
 			detach(script);
 			if (detaching) detach(t);
 			if (detaching) detach(div);
-			if (default_slot) default_slot.d(detaching);
-			/*div_binding*/ ctx[3](null);
 		}
 	};
 }
 
-function instance($$self, $$props, $$invalidate) {
-	let { $$slots: slots = {}, $$scope } = $$props;
+function instance($$self) {
 	const markerLoc = [[49.4887, 8.4658]];
 	const initialView = [49.4887, 8.4658];
-	let mapContainer;
-	let map = L.map(L.DomUtil.crete("div"), { center: initialView, zoom: 7 });
-	setContext("leafletMapInstance", map);
-	console.log("map", map);
+	let map;
 
-	L.tileLayer("https://a.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
-		maxZoom: 18
-	}).addTo(map);
+	onMount(async () => {
+		map = L.map("map").setView(initialView, 7);
 
-	onMount(() => {
-		mapContainer.appendChild(map.getContainer());
-		map.getContainer().style.width = "100%";
-		map.getContainer().style.height = "100%";
-		map.invalidateSize();
+		L.tileLayer("https://a.tile.openstreetmap.org/{z}/{x}/{y}.png ", {
+			attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+			maxZoom: 18
+		}).addTo(map);
 	});
 
-	function div_binding($$value) {
-		binding_callbacks[$$value ? 'unshift' : 'push'](() => {
-			mapContainer = $$value;
-			$$invalidate(0, mapContainer);
-		});
-	}
-
-	$$self.$$set = $$props => {
-		if ('$$scope' in $$props) $$invalidate(1, $$scope = $$props.$$scope);
-	};
-
-	return [mapContainer, $$scope, slots, div_binding];
+	return [];
 }
 
 class Component extends SvelteComponent {
