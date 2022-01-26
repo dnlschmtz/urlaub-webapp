@@ -1,8 +1,5 @@
 <script>
-    // import Map from "./components/MapView.svelte";
-    // import "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js";
     import { setContext, onMount } from "svelte";
-    // import L from "leaflet";
 
     const markerLoc = [
         [49.4887, 8.4658]
@@ -34,11 +31,6 @@
       margin: auto;
     }
 </style>
-
-
-<svelte:head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-</svelte:head>
 
 
 <div class="map" id="map"></div>
