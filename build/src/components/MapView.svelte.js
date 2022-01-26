@@ -5,18 +5,39 @@ import {
 	safe_not_equal
 } from "https://cdn.skypack.dev/svelte@3.44.1/internal";
 
-function create() {
-	
-}
+import { onMount } from 'https://cdn.skypack.dev/svelte@3.44.1/internal';
 
 function action() {
 	
 }
 
+function instance($$self, $$props, $$invalidate) {
+	function create() {
+		const markerLoc = [[49.4887, 8.4658]];
+		const initialView = [49.4887, 8.4658];
+		let map;
+
+		onMount(async () => {
+			map = L.map("map").setView(initialView, 7);
+
+			L.tileLayer("https://a.tile.openstreetmap.org/{z}/{x}/{y}.png ", {
+				attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+				maxZoom: 18
+			}).addTo(map);
+		});
+	}
+
+	return [create];
+}
+
 class Component extends SvelteComponent {
 	constructor(options) {
 		super();
-		init(this, options, null, null, safe_not_equal, {});
+		init(this, options, instance, null, safe_not_equal, { create: 0 });
+	}
+
+	get create() {
+		return this.$$.ctx[0];
 	}
 }
 
