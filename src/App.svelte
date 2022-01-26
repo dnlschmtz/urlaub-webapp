@@ -2,6 +2,7 @@
     import { onMount } from "svelte";
 
     let groupName = "Testgruppe";
+    let description = "Beschreibung der Reise";
 
     function create() {
         const markerLoc = [
@@ -65,13 +66,35 @@
         margin: auto;
     }
 
+    .left {
+        width: 50%;
+        float: left;
+    }
+
+    .right {
+        width: 50%;
+        float: right;
+    }
+
+    .description {
+        background-color: #202020;
+        color: #fff;
+        font-family: "Roboto";
+        font-size: 1.5rem;
+        text-align: justify;
+        padding: 10px;
+        width: 100%;
+        height: 280px;
+    }
+
     .map {
         width: 100%;
         height: 420px;
+        margin-bottom: 50px;
     }
 
     @media only screen and (max-width: 1220px) {
-        body, html {
+        :global(body) {
             font-size: 12px;
         }
 
@@ -84,8 +107,14 @@
 
 <header>
     <div class="content">
-        <h2 class="title">Eure Reise</h2>
-        <h2 class="group-name">{groupName}</h2>
+        <div class="left">
+            <h2 class="title">Eure Reise</h2>
+            <h2 class="group-name">{groupName}</h2>
+        </div>
+
+        <div class="right">
+            <textarea class="description">{description}</textarea>
+        </div>
     </div>
 </header>
 
