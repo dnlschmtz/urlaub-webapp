@@ -1,5 +1,7 @@
-import {createTelegramBot} from "./bot.ts";
-import {serveWeb} from "./server.ts";
+import { createTelegramBot } from "./bot.ts";
+import { serveWeb } from "./server.ts";
+
+import { connect } from "./mongodb_connector.ts";
 
 
 const TOKEN = Deno.env.get("TOKEN");
