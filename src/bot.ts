@@ -39,7 +39,7 @@ export function createTelegramBot(token: string) {
             return;
         }
 
-        await bot.sendMessage({ chat_id: message.message.chat.id, text: `Unbekannter Befehl ${text}. Du kannst eine neue Gruppe mit newGroup erstellen.` })
+        await bot.sendMessage({ chat_id: message.message.chat.id, text: `Unbekannter Befehl ${text}. Du kannst mit help eine liste der befehle bekommen.` })
 
         });
 
