@@ -13,11 +13,13 @@ export function createTelegramBot(token: string) {
         if(text.startsWith("newGroup")) {
             let antwort = text.replace("newGroup", "");
             await bot.sendMessage({ chat_id: message.message.chat.id, text: `Neue Gruppe ${antwort} erstellt` })
+            await bot.sendMessage({ chat_id: message.message.chat.id, text: `Hier der Testlink: https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley ` })
             return;
         }
         if(text.startsWith("NewGroup")) {
             let antwort = text.replace("NewGroup", "");
             await bot.sendMessage({ chat_id: message.message.chat.id, text: `Neue Gruppe ${antwort} erstellt` })
+            await bot.sendMessage({ chat_id: message.message.chat.id, text: `Hier der Testlink: https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley ` })
             return;
         }
         if(text.startsWith("Help")) {
