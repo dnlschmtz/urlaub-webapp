@@ -1,7 +1,7 @@
                     GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 
- Copyright (C) 2022 Travel2Gether, Inc. <https://fsf.org/>
+ Copyright (C) 2022 Travel2Gether, Inc. <https://Travel2Gether.de/>
  Everyone is permitted to copy and distribute verbatim copies
  of this license document, but changing it is not allowed.
 
