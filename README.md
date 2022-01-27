@@ -1,11 +1,20 @@
-# Urlaubsplaner Webapp
+# Travel2Gether
+
+## Urlaubsplaner Webapp
 Ein Urlaubsplaner für Reisegruppen...
 
 Die Webapp wurde im Fach Fallstudie zu dem Zweck entwickelt, lästige Termin und Reisezielabsprachen in einer Gruppe von mehreren Personan allen Alters zu vereinfachen. 
 
-Auf der Seite können Benutzer ihre eigenen Gruppenräume erstellen, Mitglieder hinzufügen und ihren Kalender synchonisieren. So wird die Terminfindung vereinfacht. Anschließend werden automatisch Reiseziele von Kooperationspartnern vorgeschlagen. Allerdings können auch eigene Reseziele eingetragen werden und zur Abstimmung unter den Gruppenmitgliedern freigegeben werden. 
+Auf der Seite können Benutzer ihre eigenen Gruppenräume erstellen, Mitglieder hinzufügen und ihren Kalender synchonisieren. So wird die Terminfindung vereinfacht. Anschließend werden automatisch Reiseziele von Kooperationspartnern vorgeschlagen. Allerdings können auch eigene Reseziele eingetragen werden und zur Abstimmung unter den Gruppenmitgliedern freigegeben werden. So wird die Abstimmung auf ein Reiseziel so einfach wie möglich gestaltet.
 
-## Ziel in Web Programming
+## Web-Programming
+
+### Zielsetzung
+Reisegruppenräume auf der Urlaubsplaner Webapp sollen per Telegrambot erstellt werden.
+
+
+Zuallererst muss die Webapp mit Svelte neugeschrieben werden, da sie vorher auf html und CSS basiert war.
+
 Reisegruppenräume auf der Urlaubsplaner Webapp sollen per Telegrambot erstellt werden 
 
 
