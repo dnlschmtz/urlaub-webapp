@@ -12,7 +12,7 @@ Auf der Seite können Benutzer ihre eigenen Gruppenräume erstellen, Mitglieder 
 ### Zielsetzung
 Reisegruppenräume auf der Urlaubsplaner Webapp sollen per Telegrambot erstellt werden.
 
-
+### 
 Zuallererst muss die Webapp mit Svelte neugeschrieben werden, da sie vorher auf html und CSS basiert war.
 
 Reisegruppenräume auf der Urlaubsplaner Webapp sollen per Telegrambot erstellt werden 
