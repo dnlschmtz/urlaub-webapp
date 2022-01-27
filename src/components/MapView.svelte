@@ -1,7 +1,7 @@
 <script>
     import { onMount } from "svelte";
 
-    export function create() {
+    function create() {
         const markerLoc = [
             [49.4887, 8.4658]
         ];
@@ -18,8 +18,8 @@
                 }).addTo(map);
         });
     }
-    
-    function action() {
 
+    function action() {
+        
     }
 </script>
