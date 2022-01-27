@@ -1,4 +1,4 @@
-import { TelegramBot, UpdateType } from "https://raw.githubusercontent.com/michael-spengler/deno-telegram-bot-api/master/mod.ts"
+import { TelegramBot, UpdateType } from "https://deno.land/x/telegram_chatbot/mod.ts"
 import "https://deno.land/x/dot_env@0.2.0/load.ts"
 
 
