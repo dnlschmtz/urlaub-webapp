@@ -16,6 +16,7 @@ Reisegruppenräume auf der Urlaubsplaner Webapp sollen per Telegrambot erstellt 
 
 ### Vorgehensweise
 Zuallererst muss die Webapp mit Svelte neugeschrieben werden, da sie vorher auf html und CSS basiert war.
+Anschließend wurde der Telegrambot mithilfe des Botfathers initiiert. Dann wurden dem Bot neue Befehle hinzugefügt um über 
 
 Reisegruppenräume auf der Urlaubsplaner Webapp sollen per Telegrambot erstellt werden 
 
