@@ -1,20 +1,18 @@
-import { Bson, MongoClient } from "https://deno.land/x/mongo@v0.29.1/mod.ts";
+import { Bson, MongoClient, Collection } from "https://deno.land/x/mongo@v0.29.1/mod.ts";
 import { Group } from "./group.ts";
 
 
 export class MongoDBConnector {
-
     url: string;
-    connection: any;
-    collection: any;
+    connection: MongoClient;
+    collection: Collection<Group> | undefined;
 
     constructor(url: string) {
         this.url = url;
+        this.connection = new MongoClient();
     }
 
     async connect() {
-        this.connection = new MongoClient();
-    
         // Connecting to a Mongo Atlas Database
         await this.connection.connect(this.url);
 
@@ -23,15 +21,15 @@ export class MongoDBConnector {
     }
 
     async insert(group: any) {
-        return await this.collection.insertOne(group);
+        return await this.collection?.insertOne(group);
     }
 
-    async update(search: any, update: any) {
-        return await this.collection.updateOne();
+    async update(query: any, update: any) {
+        return await this.collection?.updateOne(query, update);
     }
 
     async findOne(insertId: string) {
-        return await this.collection.findOne({ _id: new Bson.ObjectId(insertId) });
+        return await this.collection?.findOne({ _id: new Bson.ObjectId(insertId) });
     }
 
     async listAll() {
