@@ -18,6 +18,28 @@ Reisegruppenräume auf der Urlaubsplaner Webapp sollen per Telegrambot erstellt 
 Zuallererst muss die Webapp mit Svelte neugeschrieben werden, da sie vorher auf html und CSS basiert war.
 Anschließend wurde der Telegrambot mithilfe des Botfathers initiiert. Dann wurden dem Bot neue Befehle hinzugefügt um später Gruppenräume auf der Webapp zu erstellen.
 
+## Einarbeiten in Deno
+Tutorials zum Einarbeiten in die Funktionen von Deno
+
+-https://www.youtube.com/watch?v=2iLeRzHvc10
+
+-https://www.youtube.com/watch?v=CpC5MTKAuwI
+
+-https://www.youtube.com/watch?v=5_uf9cbtIyE
+
+-https://www.youtube.com/watch?v=yv1Nl9N5ur4
+
+-https://www.youtube.com/watch?v=yv1Nl9N5ur4
+
+-https://www.youtube.com/watch?v=zkFuAZsEEUc
+
+## Einarbeiten in Svelte
+
+-https://www.youtube.com/watch?v=zojEMeQGGHs
+
+-https://www.youtube.com/watch?v=lnpdn2rE2N8
+
+-https://www.youtube.com/watch?v=TanFofZBvNI
 
 ## Zum Bauen der Svelte-App
 ```
