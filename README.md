@@ -55,6 +55,6 @@ novas build
 
 ## Zum Starten
 ```
-deno run --allow-net --allow-read --allow-env src/main.ts
+deno run --allow-net --allow-read --allow-env app.ts
 ```
 
