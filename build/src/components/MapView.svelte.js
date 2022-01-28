@@ -11,7 +11,7 @@ function action() {
 	
 }
 
-function instance($$self, $$props, $$invalidate) {
+function instance($$self) {
 	function create() {
 		const markerLoc = [[49.4887, 8.4658]];
 		const initialView = [49.4887, 8.4658];
@@ -27,17 +27,13 @@ function instance($$self, $$props, $$invalidate) {
 		});
 	}
 
-	return [create];
+	return [];
 }
 
 class Component extends SvelteComponent {
 	constructor(options) {
 		super();
-		init(this, options, instance, null, safe_not_equal, { create: 0 });
-	}
-
-	get create() {
-		return this.$$.ctx[0];
+		init(this, options, instance, null, safe_not_equal, {});
 	}
 }
 

@@ -19,6 +19,7 @@ import {
 } from "https://cdn.skypack.dev/svelte@3.44.1/internal";
 
 import { onMount } from 'https://cdn.skypack.dev/svelte@3.44.1/internal';
+import "./components/MapView.svelte";
 
 function add_css(target) {
 	append_styles(target, "svelte-1ojwxik", "@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100&family=Roboto&display=swap');body{margin:0px;font-family:sans-serif}header.svelte-1ojwxik{background-color:#202020;display:inline-flex;margin-bottom:50px;width:100%;min-height:500px;height:65vh;color:#fff}.title.svelte-1ojwxik{font-size:5rem;font-weight:200;margin-bottom:0px;text-transform:uppercase;font-family:\"Raleway\"}.group-name.svelte-1ojwxik{font-size:5rem;margin-top:0px;margin-bottom:3rem;text-transform:uppercase;font-family:\"Roboto\"}.content.svelte-1ojwxik{width:100%;max-width:1200px;margin:auto}.left.svelte-1ojwxik{width:50%;float:left}.right.svelte-1ojwxik{width:50%;float:right}.description.svelte-1ojwxik{background-color:#202020;color:#fff;font-family:\"Roboto\";font-size:1.5rem;text-align:justify;padding:10px;width:100%;height:280px}.map.svelte-1ojwxik{width:100%;height:420px;margin-bottom:50px}@media only screen and (max-width: 1220px){body{font-size:12px}.content.svelte-1ojwxik{margin:0px 20px}}");
@@ -135,21 +136,6 @@ let groupName = "Testgruppe";
 let description = "Beschreibung der Reise";
 
 function instance($$self) {
-	function create() {
-		const markerLoc = [[49.4887, 8.4658]];
-		const initialView = [49.4887, 8.4658];
-		let map;
-
-		onMount(async () => {
-			map = L.map("map").setView(initialView, 7);
-
-			L.tileLayer("https://a.tile.openstreetmap.org/{z}/{x}/{y}.png ", {
-				attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
-				maxZoom: 18
-			}).addTo(map);
-		});
-	}
-
 	create();
 	return [];
 }
