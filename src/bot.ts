@@ -12,14 +12,14 @@ export function createTelegramBot(token: string) {
         console.log(text);
 //        console.log(lower_text);
 
-        if(text.startsWith("newGroup")) {
+        if(text.startsWith("newgroup")) {
 
-            let antwort = text.replace("newGroup", "");
+            let antwort = text.replace("newgroup", "");
             await bot.sendMessage({ chat_id: message.message.chat.id, text: `Neue Gruppe ${antwort} erstellt` })
             await bot.sendMessage({ chat_id: message.message.chat.id, text: '[Deine Gruppe](https://www.latlmes.com/opinion/teenagers-spend-their-time-using-their-phones-is-it-worth-it-1)', parse_mode:'MarkdownV2' })
             return;
         }
-        if(text.startsWith("Help")) {
+        if(text.startsWith("help")) {
             await bot.sendMessage({ chat_id: message.message.chat.id, text: `Schreibe: \nNewGroup \nHelp` })
             return;
         }
