@@ -1,4 +1,4 @@
-import { TelegramBot, UpdateType } from "https://raw.githubusercontent.com/michael-spengler/deno-telegram-bot-api/master/mod.ts"
+import { TelegramBot, UpdateType } from "https://deno.land/x/telegram_chatbot/mod.ts"
 import "https://deno.land/x/dot_env@0.2.0/load.ts"
 
 
@@ -13,13 +13,25 @@ export function createTelegramBot(token: string) {
         if(text.startsWith("newGroup")) {
             let antwort = text.replace("newGroup", "");
             await bot.sendMessage({ chat_id: message.message.chat.id, text: `Neue Gruppe ${antwort} erstellt` })
-            await bot.sendMessage({ chat_id: message.message.chat.id, text: '[Deine Gruppe](https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley)', parse_mode:'MarkdownV2' })
+            await bot.sendMessage({ chat_id: message.message.chat.id, text: '[Deine Gruppe](https://www.latlmes.com/opinion/teenagers-spend-their-time-using-their-phones-is-it-worth-it-1)', parse_mode:'MarkdownV2' })
             return;
         }
         if(text.startsWith("NewGroup")) {
             let antwort = text.replace("NewGroup", "");
             await bot.sendMessage({ chat_id: message.message.chat.id, text: `Neue Gruppe ${antwort} erstellt` })
-            await bot.sendMessage({chat_id: message.message.chat.id, text: '[Deine Gruppe](https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley)', parse_mode:'MarkdownV2' })
+            await bot.sendMessage({chat_id: message.message.chat.id, text: '[Deine Gruppe](https://www.latlmes.com/opinion/teenagers-spend-their-time-using-their-phones-is-it-worth-it-1)', parse_mode:'MarkdownV2' })
+            return;
+        }
+        if(text.startsWith("Newgroup")) {
+            let antwort = text.replace("NewGroup", "");
+            await bot.sendMessage({ chat_id: message.message.chat.id, text: `Neue Gruppe ${antwort} erstellt` })
+            await bot.sendMessage({chat_id: message.message.chat.id, text: '[Deine Gruppe](https://www.latlmes.com/opinion/teenagers-spend-their-time-using-their-phones-is-it-worth-it-1)', parse_mode:'MarkdownV2' })
+            return;
+        }
+        if(text.startsWith("newgroup")) {
+            let antwort = text.replace("NewGroup", "");
+            await bot.sendMessage({ chat_id: message.message.chat.id, text: `Neue Gruppe ${antwort} erstellt` })
+            await bot.sendMessage({chat_id: message.message.chat.id, text: '[Deine Gruppe](https://www.latlmes.com/opinion/teenagers-spend-their-time-using-their-phones-is-it-worth-it-1)', parse_mode:'MarkdownV2' })
             return;
         }
         if(text.startsWith("Help")) {
@@ -27,7 +39,7 @@ export function createTelegramBot(token: string) {
             return;
         }
 
-        await bot.sendMessage({ chat_id: message.message.chat.id, text: `Unbekannter Befehl ${text}. Du kannst eine neue Gruppe mit newGroup erstellen.` })
+        await bot.sendMessage({ chat_id: message.message.chat.id, text: `Unbekannter Befehl ${text}. Du kannst mit help eine liste der befehle bekommen.` })
 
         });
 
