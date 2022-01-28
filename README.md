@@ -47,9 +47,14 @@ Tutorials zum Einarbeiten in die Funktionen von Deno
 ```
 novas build
 ```
+## Mongodb Basics
+
+-https://www.youtube.com/watch?v=pWbMrx5rVBE
+
+-https://www.youtube.com/watch?v=P6gEnVlJPOc
 
 ## Zum Starten
 ```
-deno run --allow-net --allow-read --allow-env app.ts
+deno run --allow-net --allow-read --allow-env src/main.ts
 ```
 
