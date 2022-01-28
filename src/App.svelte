@@ -1,13 +1,18 @@
 <script>
     import { onMount } from "svelte";
-    import "./components/MapView.svelte"
+    import MapView from "./components/MapView.svelte"
+
+    let mapView;
 
     let groupName = "Testgruppe";
     let description = "Beschreibung der Reise";
 
-    create();
+    onMount(function() {
+        mapView.create();
+    });
 </script>
 
+<MapView bind:this={mapView}/>
 
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100&family=Roboto&display=swap');
@@ -18,9 +23,8 @@
     }
 
     header {
-        background-color: #202020;
+        background-color: #1e2427;
         display: inline-flex;
-        margin-bottom: 50px;
         width: 100%;
         min-height: 500px;
         height: 65vh;
@@ -60,20 +64,25 @@
     }
 
     .description {
-        background-color: #202020;
-        color: #fff;
+        background-color: #1e2427;
         font-family: "Roboto";
         font-size: 1.5rem;
         text-align: justify;
+        color: #fff;
         padding: 10px;
         width: 100%;
         height: 280px;
     }
 
+    .gray-bg {
+        width: 100%;
+        padding-top: 50px 0px;
+        background-color: #e5e5e5;
+    }
+
     .map {
         width: 100%;
         height: 420px;
-        margin-bottom: 50px;
     }
 
     @media only screen and (max-width: 1220px) {
@@ -102,6 +111,8 @@
 </header>
 
 
-<div class="content">
-    <div class="map" id="map"></div>
+<div class="gray-bg">
+    <div class="content">
+        <div class="map" id="map"></div>
+    </div>
 </div>
