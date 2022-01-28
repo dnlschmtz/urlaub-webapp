@@ -28,12 +28,16 @@ export class MongoDBConnector {
         return await this.collection?.updateOne(query, update);
     }
 
-    async findOne(insertId: string) {
+    async find(insertId: string) {
         return await this.collection?.findOne({ _id: new Bson.ObjectId(insertId) });
     }
 
-    async listAll() {
-
+    async findAll() {
+        return await this.collection?.find({}).toArray();
     } 
+
+    async delete(insertId: string) {
+        return await this.collection?.deleteOne({ _id: new Bson.ObjectId(insertId) });
+    }
 
 }
