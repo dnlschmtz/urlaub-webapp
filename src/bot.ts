@@ -7,9 +7,9 @@ export function createTelegramBot(token: string) {
 
     bot.on(UpdateType.Message, async (message: any) => {
 
-        let text = message.message.text || "I can't hear you";
-//        let lower_text = text.toLowerCase()
-//        console.log(text);
+        const text = message.message.text.toLowerCase() || "I can't hear you";
+//        let text = text.toLowerCase()
+        console.log(text);
 //        console.log(lower_text);
 
         if(text.startsWith("newGroup")) {
