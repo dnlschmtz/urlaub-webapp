@@ -1,6 +1,6 @@
 <script>
     import { onMount } from "svelte";
-    import { create } from "./components/MapView.svelte"
+    import "./components/MapView.svelte"
 
     let groupName = "Testgruppe";
     let description = "Beschreibung der Reise";
