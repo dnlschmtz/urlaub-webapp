@@ -6,14 +6,18 @@ export function serveWeb(port: number) {
     const app = opine();
     const __dir = dirname(import.meta.url);
 
+    // Serve static dirs
     app.use(serveStatic(join(__dir, "../public")));
     app.use(serveStatic(join(__dir, "../build")));
 
-    app.use("/static", serveStatic(join(__dir, "../public")));
-
-    app.get("/", function (req, res) {
-        res.send("Hello World");
+    // 404 Error handling
+    app.use(function(req, res) {
+        res.setStatus(404);
+        res.sendFile(join(__dir, "../public/404.html"));
     });
+
+    // Register websocket
+    // ...
 
     app.listen(
         port,
