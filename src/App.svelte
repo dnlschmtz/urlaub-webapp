@@ -1,18 +1,21 @@
 <script>
     import { onMount } from "svelte";
-    import MapView from "./components/MapView.svelte"
+    import MapView from "./components/MapView.svelte";
+    import Timeline from "./components/Timeline.svelte";
 
-    let mapView;
+    let mapView, timeline;
 
     let groupName = "Testgruppe";
     let description = "Beschreibung der Reise";
 
     onMount(function() {
         mapView.create();
+        timeline.create();
     });
 </script>
 
 <MapView bind:this={mapView}/>
+<Timeline bind:this={timeline}/>
 
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100&family=Roboto&display=swap');
@@ -76,13 +79,19 @@
 
     .gray-bg {
         width: 100%;
-        padding-top: 50px 0px;
+        padding: 50px 0px;
         background-color: #e5e5e5;
     }
 
     .map {
         width: 100%;
         height: 420px;
+    }
+
+    .timeline {
+        margin-top: 50px;
+        height: 420px;
+        width: 100%;
     }
 
     @media only screen and (max-width: 1220px) {
@@ -115,4 +124,8 @@
     <div class="content">
         <div class="map" id="map"></div>
     </div>
+</div>
+
+<div class="content">
+    <div class="timeline" id="timeline"></div>
 </div>
