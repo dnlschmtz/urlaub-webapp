@@ -28,7 +28,7 @@ import { onMount } from 'https://cdn.skypack.dev/svelte@3.44.1/internal';
 import MapView from './components/MapView.svelte.js';
 
 function add_css(target) {
-	append_styles(target, "svelte-14tmff9", "@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100&family=Roboto&display=swap');body{margin:0px;font-family:sans-serif}header.svelte-14tmff9{background-color:#1e2427;display:inline-flex;width:100%;min-height:500px;height:65vh;color:#fff}.title.svelte-14tmff9{font-size:5rem;font-weight:200;margin-bottom:0px;text-transform:uppercase;font-family:\"Raleway\"}.group-name.svelte-14tmff9{font-size:5rem;margin-top:0px;margin-bottom:3rem;text-transform:uppercase;font-family:\"Roboto\"}.content.svelte-14tmff9{width:100%;max-width:1200px;margin:auto}.left.svelte-14tmff9{width:50%;float:left}.right.svelte-14tmff9{width:50%;float:right}.description.svelte-14tmff9{background-color:#1e2427;color:#fff;font-family:\"Roboto\";font-size:1.5rem;text-align:justify;padding:10px;width:100%;height:280px}.gray-bg.svelte-14tmff9{padding-top:50px;width:100%;background-color:#e5e5e5}.map.svelte-14tmff9{width:100%;height:420px;margin-bottom:50px}@media only screen and (max-width: 1220px){body{font-size:12px}.content.svelte-14tmff9{margin:0px 20px}}");
+	append_styles(target, "svelte-wklco9", "@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100&family=Roboto&display=swap');body{margin:0px;font-family:sans-serif}header.svelte-wklco9{background-color:#1e2427;display:inline-flex;width:100%;min-height:500px;height:65vh;color:#fff}.title.svelte-wklco9{font-size:5rem;font-weight:200;margin-bottom:0px;text-transform:uppercase;font-family:\"Raleway\"}.group-name.svelte-wklco9{font-size:5rem;margin-top:0px;margin-bottom:3rem;text-transform:uppercase;font-family:\"Roboto\"}.content.svelte-wklco9{width:100%;max-width:1200px;margin:auto}.left.svelte-wklco9{width:50%;float:left}.right.svelte-wklco9{width:50%;float:right}.description.svelte-wklco9{background-color:#1e2427;font-family:\"Roboto\";font-size:1.5rem;text-align:justify;color:#fff;padding:10px;width:100%;height:280px}.gray-bg.svelte-wklco9{width:100%;padding-top:50px 0px;background-color:#e5e5e5}.map.svelte-wklco9{width:100%;height:420px}@media only screen and (max-width: 1220px){body{font-size:12px}.content.svelte-wklco9{margin:0px 20px}}");
 }
 
 function create_fragment(ctx) {
@@ -114,18 +114,18 @@ function create_fragment(ctx) {
 			this.h();
 		},
 		h() {
-			attr(h20, "class", "title svelte-14tmff9");
-			attr(h21, "class", "group-name svelte-14tmff9");
-			attr(div0, "class", "left svelte-14tmff9");
-			attr(textarea, "class", "description svelte-14tmff9");
+			attr(h20, "class", "title svelte-wklco9");
+			attr(h21, "class", "group-name svelte-wklco9");
+			attr(div0, "class", "left svelte-wklco9");
+			attr(textarea, "class", "description svelte-wklco9");
 			textarea.value = description;
-			attr(div1, "class", "right svelte-14tmff9");
-			attr(div2, "class", "content svelte-14tmff9");
-			attr(header, "class", "svelte-14tmff9");
-			attr(div3, "class", "map svelte-14tmff9");
+			attr(div1, "class", "right svelte-wklco9");
+			attr(div2, "class", "content svelte-wklco9");
+			attr(header, "class", "svelte-wklco9");
+			attr(div3, "class", "map svelte-wklco9");
 			attr(div3, "id", "map");
-			attr(div4, "class", "content svelte-14tmff9");
-			attr(div5, "class", "gray-bg svelte-14tmff9");
+			attr(div4, "class", "content svelte-wklco9");
+			attr(div5, "class", "gray-bg svelte-wklco9");
 		},
 		m(target, anchor) {
 			mount_component(mapview, target, anchor);
