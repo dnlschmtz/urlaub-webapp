@@ -2,7 +2,6 @@ import { TelegramBot, UpdateType } from "https://deno.land/x/telegram_chatbot/mo
 import "https://deno.land/x/dot_env@0.2.0/load.ts"
 
 
-
 export function createTelegramBot(token: string) {
 }
     const bot = new TelegramBot(token);
@@ -22,7 +21,6 @@ export function createTelegramBot(token: string) {
 
         if(text.startsWith("newgroup")) {
 
-            let antwort = text.replace("info", "");
             await bot.sendMessage({ chat_id: message.message.chat.id, text: `Deine Gruppen:
             ` })
             return;
