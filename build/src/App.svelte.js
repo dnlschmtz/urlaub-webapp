@@ -282,8 +282,8 @@ function instance($$self, $$props, $$invalidate) {
 			const group = JSON.parse(event.data);
 			$$invalidate(2, groupName = group.name);
 			$$invalidate(3, description = group.description);
-			mapView.create();
-			timeline.create();
+			mapView.create(group.targets);
+			timeline.create(group.dates);
 		});
 	});
 

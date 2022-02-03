@@ -5,7 +5,7 @@ import {
 	safe_not_equal
 } from "https://cdn.skypack.dev/svelte@3.44.1/internal";
 
-function create() {
+function create(dates) {
 	let rows = [
 		['Washington', new Date(1789, 3, 30), new Date(1797, 2, 4)],
 		['Adams', new Date(1797, 2, 4), new Date(1801, 2, 4)],

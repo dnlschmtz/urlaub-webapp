@@ -33,8 +33,8 @@
             groupName = group.name;
             description = group.description;
 
-            mapView.create();
-            timeline.create();
+            mapView.create(group.targets);
+            timeline.create(group.dates);
         });
     });
 </script>
