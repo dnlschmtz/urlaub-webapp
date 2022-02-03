@@ -30,7 +30,7 @@ import MapView from './components/MapView.svelte.js';
 import Timeline from './components/Timeline.svelte.js';
 
 function add_css(target) {
-	append_styles(target, "svelte-1w7wqpj", "@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100&family=Roboto&display=swap');body{margin:0px;font-family:sans-serif}header.svelte-1w7wqpj{background-color:#1e2427;display:inline-flex;width:100%;min-height:500px;height:65vh;color:#fff}.title.svelte-1w7wqpj{font-size:5rem;font-weight:200;margin-bottom:0px;text-transform:uppercase;font-family:\"Raleway\"}.group-name.svelte-1w7wqpj{font-size:5rem;margin-top:0px;margin-bottom:3rem;text-transform:uppercase;font-family:\"Roboto\"}.content.svelte-1w7wqpj{width:100%;max-width:1200px;margin:auto}.left.svelte-1w7wqpj{width:50%;float:left}.right.svelte-1w7wqpj{width:50%;float:right}.description.svelte-1w7wqpj{background-color:#1e2427;font-family:\"Roboto\";font-size:1.5rem;text-align:justify;color:#fff;padding:10px;width:100%;height:280px}.gray-bg.svelte-1w7wqpj{width:100%;padding:50px 0px;background-color:#e5e5e5}.map.svelte-1w7wqpj{width:100%;height:420px}.timeline.svelte-1w7wqpj{margin-top:50px;height:420px;width:100%}@media only screen and (max-width: 1220px){body{font-size:12px}.content.svelte-1w7wqpj{margin:0px 20px}}");
+	append_styles(target, "svelte-14l9no9", "@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100&family=Roboto&display=swap');body{margin:0px;font-family:sans-serif}header.svelte-14l9no9{background-color:#1e2427;display:inline-flex;width:100%;min-height:500px;height:65vh;color:#fff}.title.svelte-14l9no9{font-size:5rem;font-weight:200;margin-bottom:0px;text-transform:uppercase;font-family:\"Raleway\"}.group-name.svelte-14l9no9{font-size:5rem;margin-top:0px;margin-bottom:3rem;text-transform:uppercase;font-family:\"Roboto\"}.small-title.svelte-14l9no9{font-size:1.7rem;margin-bottom:20px;text-transform:uppercase;font-family:\"Raleway\"}.content.svelte-14l9no9{width:100%;max-width:1200px;margin:auto}.left.svelte-14l9no9{width:50%;float:left}.right.svelte-14l9no9{width:50%;float:right}.description.svelte-14l9no9{background-color:#1e2427;font-family:\"Roboto\";font-size:1.5rem;text-align:justify;color:#fff;padding:10px;width:100%;height:280px}.gray-bg.svelte-14l9no9{width:100%;padding:50px 0px;background-color:#e5e5e5;margin-bottom:50px}.map.svelte-14l9no9{width:100%;height:420px}.timeline.svelte-14l9no9{height:420px;width:100%}@media only screen and (max-width: 1220px){body{font-size:12px}.content.svelte-14l9no9{margin:0px 20px}}");
 }
 
 function create_fragment(ctx) {
@@ -50,12 +50,20 @@ function create_fragment(ctx) {
 	let div1;
 	let textarea;
 	let t6;
+	let div6;
 	let div5;
-	let div4;
 	let div3;
 	let t7;
+	let div4;
+	let t8;
+	let h30;
+	let t9;
+	let t10;
+	let div8;
+	let h31;
+	let t11;
+	let t12;
 	let div7;
-	let div6;
 	let current;
 	let mapview_props = {};
 	mapview = new MapView({ props: mapview_props });
@@ -82,12 +90,20 @@ function create_fragment(ctx) {
 			div1 = element("div");
 			textarea = element("textarea");
 			t6 = space();
+			div6 = element("div");
 			div5 = element("div");
-			div4 = element("div");
 			div3 = element("div");
 			t7 = space();
+			div4 = element("div");
+			t8 = space();
+			h30 = element("h3");
+			t9 = text("Stimme für ein Reiseziel");
+			t10 = space();
+			div8 = element("div");
+			h31 = element("h3");
+			t11 = text("Wann kann wer?");
+			t12 = space();
 			div7 = element("div");
-			div6 = element("div");
 			this.h();
 		},
 		l(nodes) {
@@ -120,38 +136,55 @@ function create_fragment(ctx) {
 			div2_nodes.forEach(detach);
 			header_nodes.forEach(detach);
 			t6 = claim_space(nodes);
-			div5 = claim_element(nodes, "DIV", { class: true });
+			div6 = claim_element(nodes, "DIV", { class: true });
+			var div6_nodes = children(div6);
+			div5 = claim_element(div6_nodes, "DIV", { class: true });
 			var div5_nodes = children(div5);
+			div3 = claim_element(div5_nodes, "DIV", { class: true, id: true });
+			children(div3).forEach(detach);
+			t7 = claim_space(div5_nodes);
 			div4 = claim_element(div5_nodes, "DIV", { class: true });
 			var div4_nodes = children(div4);
-			div3 = claim_element(div4_nodes, "DIV", { class: true, id: true });
-			children(div3).forEach(detach);
 			div4_nodes.forEach(detach);
+			t8 = claim_space(div5_nodes);
+			h30 = claim_element(div5_nodes, "H3", { class: true });
+			var h30_nodes = children(h30);
+			t9 = claim_text(h30_nodes, "Stimme für ein Reiseziel");
+			h30_nodes.forEach(detach);
 			div5_nodes.forEach(detach);
-			t7 = claim_space(nodes);
-			div7 = claim_element(nodes, "DIV", { class: true });
-			var div7_nodes = children(div7);
-			div6 = claim_element(div7_nodes, "DIV", { class: true, id: true });
-			children(div6).forEach(detach);
-			div7_nodes.forEach(detach);
+			div6_nodes.forEach(detach);
+			t10 = claim_space(nodes);
+			div8 = claim_element(nodes, "DIV", { class: true });
+			var div8_nodes = children(div8);
+			h31 = claim_element(div8_nodes, "H3", { class: true });
+			var h31_nodes = children(h31);
+			t11 = claim_text(h31_nodes, "Wann kann wer?");
+			h31_nodes.forEach(detach);
+			t12 = claim_space(div8_nodes);
+			div7 = claim_element(div8_nodes, "DIV", { class: true, id: true });
+			children(div7).forEach(detach);
+			div8_nodes.forEach(detach);
 			this.h();
 		},
 		h() {
-			attr(h20, "class", "title svelte-1w7wqpj");
-			attr(h21, "class", "group-name svelte-1w7wqpj");
-			attr(div0, "class", "left svelte-1w7wqpj");
-			attr(textarea, "class", "description svelte-1w7wqpj");
+			attr(h20, "class", "title svelte-14l9no9");
+			attr(h21, "class", "group-name svelte-14l9no9");
+			attr(div0, "class", "left svelte-14l9no9");
+			attr(textarea, "class", "description svelte-14l9no9");
 			textarea.value = /*description*/ ctx[3];
-			attr(div1, "class", "right svelte-1w7wqpj");
-			attr(div2, "class", "content svelte-1w7wqpj");
-			attr(header, "class", "svelte-1w7wqpj");
-			attr(div3, "class", "map svelte-1w7wqpj");
+			attr(div1, "class", "right svelte-14l9no9");
+			attr(div2, "class", "content svelte-14l9no9");
+			attr(header, "class", "svelte-14l9no9");
+			attr(div3, "class", "map svelte-14l9no9");
 			attr(div3, "id", "map");
-			attr(div4, "class", "content svelte-1w7wqpj");
-			attr(div5, "class", "gray-bg svelte-1w7wqpj");
-			attr(div6, "class", "timeline svelte-1w7wqpj");
-			attr(div6, "id", "timeline");
-			attr(div7, "class", "content svelte-1w7wqpj");
+			attr(div4, "class", "targets");
+			attr(h30, "class", "small-title svelte-14l9no9");
+			attr(div5, "class", "content svelte-14l9no9");
+			attr(div6, "class", "gray-bg svelte-14l9no9");
+			attr(h31, "class", "small-title svelte-14l9no9");
+			attr(div7, "class", "timeline svelte-14l9no9");
+			attr(div7, "id", "timeline");
+			attr(div8, "class", "content svelte-14l9no9");
 		},
 		m(target, anchor) {
 			mount_component(mapview, target, anchor);
@@ -170,12 +203,20 @@ function create_fragment(ctx) {
 			append_hydration(div2, div1);
 			append_hydration(div1, textarea);
 			insert_hydration(target, t6, anchor);
-			insert_hydration(target, div5, anchor);
+			insert_hydration(target, div6, anchor);
+			append_hydration(div6, div5);
+			append_hydration(div5, div3);
+			append_hydration(div5, t7);
 			append_hydration(div5, div4);
-			append_hydration(div4, div3);
-			insert_hydration(target, t7, anchor);
-			insert_hydration(target, div7, anchor);
-			append_hydration(div7, div6);
+			append_hydration(div5, t8);
+			append_hydration(div5, h30);
+			append_hydration(h30, t9);
+			insert_hydration(target, t10, anchor);
+			insert_hydration(target, div8, anchor);
+			append_hydration(div8, h31);
+			append_hydration(h31, t11);
+			append_hydration(div8, t12);
+			append_hydration(div8, div7);
 			current = true;
 		},
 		p(ctx, [dirty]) {
@@ -209,9 +250,9 @@ function create_fragment(ctx) {
 			if (detaching) detach(t1);
 			if (detaching) detach(header);
 			if (detaching) detach(t6);
-			if (detaching) detach(div5);
-			if (detaching) detach(t7);
-			if (detaching) detach(div7);
+			if (detaching) detach(div6);
+			if (detaching) detach(t10);
+			if (detaching) detach(div8);
 		}
 	};
 }
@@ -237,8 +278,10 @@ function instance($$self, $$props, $$invalidate) {
 			}
 
 			initial = false;
-			$$invalidate(2, groupName = "Testgruppe");
-			$$invalidate(3, description = "Beschreibung der Reise");
+			console.log(event.data);
+			const group = JSON.parse(event.data);
+			$$invalidate(2, groupName = group.name);
+			$$invalidate(3, description = group.description);
 			mapView.create();
 			timeline.create();
 		});

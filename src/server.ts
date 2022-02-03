@@ -1,8 +1,10 @@
 import { opine, serveStatic } from "https://deno.land/x/opine@2.1.1/mod.ts";
 import { dirname, join } from "https://deno.land/x/opine@2.1.1/deps.ts";
 
+import { MongoDBConnector } from "./database/mongodb-connector.ts";
 
-const handleWebsocket = (socket: WebSocket) => {
+
+const handleWebsocket = async (socket: WebSocket, mongoDB: MongoDBConnector) => {
     socket.addEventListener("open", (_) => {
         console.log("socket opened");
     });
@@ -11,7 +13,7 @@ const handleWebsocket = (socket: WebSocket) => {
         console.log("socket closed");
     });
 
-    socket.addEventListener("message", (e) => {
+    socket.addEventListener("message", async (e) => {
         console.log(e.data);
         const args = e.data.split(" ");
 
@@ -21,7 +23,11 @@ const handleWebsocket = (socket: WebSocket) => {
 
         switch(args[0].toLowerCase()) {
             case "fetch-group":
-                socket.send("{}");
+                const group = await mongoDB.find(args[1]);
+
+                if(group) {
+                    socket.send(JSON.stringify(group));
+                }
                 break;
 
             case "update-group":
@@ -34,7 +40,7 @@ const handleWebsocket = (socket: WebSocket) => {
 }
 
 
-export function serveWeb(port: number) {
+export function serveWeb(port: number, mongoDB: MongoDBConnector) {
     const app = opine();
     const __dir = dirname(import.meta.url);
 
@@ -46,7 +52,7 @@ export function serveWeb(port: number) {
     app.get("/ws", async (req, res, next) => {
         if (req.headers.get("upgrade") === "websocket") {
             const sock = req.upgrade();
-            await handleWebsocket(sock);
+            await handleWebsocket(sock, mongoDB);
         } else {
             res.send("You've gotta set the magic header...");
         }
