@@ -24,16 +24,6 @@ function create(dates) {
 		dataTable.addColumn({ type: 'date', id: 'Ende' });
 		dataTable.addRows(rows);
 		let options = { timeline: { singleColor: '#ffa947' } };
-
-		/*
-google.visualization.events.addListener(chart, 'ready', function () {
-    let rects = container.getElementsByTagName('rect');
-    Array.prototype.forEach.call(rects, function(rect) {
-        if ((rect.getAttribute('x') === '0') && (rect.getAttribute('stroke') === 'none')) {
-            rect.setAttribute('fill', '#eee');
-        }
-    });
-});*/
 		chart.draw(dataTable, options);
 	}
 }

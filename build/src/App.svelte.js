@@ -28,9 +28,10 @@ import {
 import { onMount } from 'https://cdn.skypack.dev/svelte@3.44.1/internal';
 import MapView from './components/MapView.svelte.js';
 import Timeline from './components/Timeline.svelte.js';
+import Voting from './components/Voting.svelte.js';
 
 function add_css(target) {
-	append_styles(target, "svelte-14l9no9", "@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100&family=Roboto&display=swap');body{margin:0px;font-family:sans-serif}header.svelte-14l9no9{background-color:#1e2427;display:inline-flex;width:100%;min-height:500px;height:65vh;color:#fff}.title.svelte-14l9no9{font-size:5rem;font-weight:200;margin-bottom:0px;text-transform:uppercase;font-family:\"Raleway\"}.group-name.svelte-14l9no9{font-size:5rem;margin-top:0px;margin-bottom:3rem;text-transform:uppercase;font-family:\"Roboto\"}.small-title.svelte-14l9no9{font-size:1.7rem;margin-bottom:20px;text-transform:uppercase;font-family:\"Raleway\"}.content.svelte-14l9no9{width:100%;max-width:1200px;margin:auto}.left.svelte-14l9no9{width:50%;float:left}.right.svelte-14l9no9{width:50%;float:right}.description.svelte-14l9no9{background-color:#1e2427;font-family:\"Roboto\";font-size:1.5rem;text-align:justify;color:#fff;padding:10px;width:100%;height:280px}.gray-bg.svelte-14l9no9{width:100%;padding:50px 0px;background-color:#e5e5e5;margin-bottom:50px}.map.svelte-14l9no9{width:100%;height:420px}.timeline.svelte-14l9no9{height:420px;width:100%}@media only screen and (max-width: 1220px){body{font-size:12px}.content.svelte-14l9no9{margin:0px 20px}}");
+	append_styles(target, "svelte-1yztybm", "@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100&family=Roboto&display=swap');body{margin:0px;font-family:sans-serif}header.svelte-1yztybm{background-color:#1e2427;display:inline-flex;width:100%;min-height:500px;height:65vh;color:#fff}.title.svelte-1yztybm{font-size:5rem;font-weight:200;margin-bottom:0px;text-transform:uppercase;font-family:\"Raleway\"}.group-name.svelte-1yztybm{font-size:5rem;margin-top:0px;margin-bottom:3rem;text-transform:uppercase;font-family:\"Roboto\"}.small-title.svelte-1yztybm{font-size:1.7rem;margin-bottom:20px;text-transform:uppercase;font-family:\"Roboto\"}.content.svelte-1yztybm{width:100%;max-width:1200px;margin:auto}.left.svelte-1yztybm{width:50%;float:left}.right.svelte-1yztybm{width:50%;float:right}.description.svelte-1yztybm{background-color:#1e2427;font-family:\"Raleway\";font-size:1.3rem;font-weight:800;text-align:justify;color:#fff;padding:10px;width:100%;height:280px}.gray-bg.svelte-1yztybm{width:100%;padding:50px 0px;background-color:#e5e5e5}.map.svelte-1yztybm{width:100%;height:420px}.timeline.svelte-1yztybm{margin:50px 0px;min-height:420px;padding:10px;background-color:#e5e5e5;width:100%}@media only screen and (max-width: 1220px){body{font-size:12px}.content.svelte-1yztybm{margin:0px 20px}}");
 }
 
 function create_fragment(ctx) {
@@ -54,23 +55,27 @@ function create_fragment(ctx) {
 	let div5;
 	let div3;
 	let t7;
-	let div4;
-	let t8;
 	let h30;
+	let t8;
 	let t9;
+	let div4;
+	let voting_1;
 	let t10;
 	let div8;
-	let h31;
-	let t11;
-	let t12;
 	let div7;
+	let t11;
+	let h31;
+	let t12;
 	let current;
 	let mapview_props = {};
 	mapview = new MapView({ props: mapview_props });
-	/*mapview_binding*/ ctx[4](mapview);
+	/*mapview_binding*/ ctx[5](mapview);
 	let timeline_1_props = {};
 	timeline_1 = new Timeline({ props: timeline_1_props });
-	/*timeline_1_binding*/ ctx[5](timeline_1);
+	/*timeline_1_binding*/ ctx[6](timeline_1);
+	let voting_1_props = {};
+	voting_1 = new Voting({ props: voting_1_props });
+	/*voting_1_binding*/ ctx[7](voting_1);
 
 	return {
 		c() {
@@ -85,7 +90,7 @@ function create_fragment(ctx) {
 			t2 = text("Eure Reise");
 			t3 = space();
 			h21 = element("h2");
-			t4 = text(/*groupName*/ ctx[2]);
+			t4 = text(/*groupName*/ ctx[3]);
 			t5 = space();
 			div1 = element("div");
 			textarea = element("textarea");
@@ -94,16 +99,17 @@ function create_fragment(ctx) {
 			div5 = element("div");
 			div3 = element("div");
 			t7 = space();
-			div4 = element("div");
-			t8 = space();
 			h30 = element("h3");
-			t9 = text("Stimme für ein Reiseziel");
+			t8 = text("Stimme für ein Reiseziel");
+			t9 = space();
+			div4 = element("div");
+			create_component(voting_1.$$.fragment);
 			t10 = space();
 			div8 = element("div");
-			h31 = element("h3");
-			t11 = text("Wann kann wer?");
-			t12 = space();
 			div7 = element("div");
+			t11 = space();
+			h31 = element("h3");
+			t12 = text("Trage ein, wann du kannst");
 			this.h();
 		},
 		l(nodes) {
@@ -124,7 +130,7 @@ function create_fragment(ctx) {
 			t3 = claim_space(div0_nodes);
 			h21 = claim_element(div0_nodes, "H2", { class: true });
 			var h21_nodes = children(h21);
-			t4 = claim_text(h21_nodes, /*groupName*/ ctx[2]);
+			t4 = claim_text(h21_nodes, /*groupName*/ ctx[3]);
 			h21_nodes.forEach(detach);
 			div0_nodes.forEach(detach);
 			t5 = claim_space(div2_nodes);
@@ -143,48 +149,49 @@ function create_fragment(ctx) {
 			div3 = claim_element(div5_nodes, "DIV", { class: true, id: true });
 			children(div3).forEach(detach);
 			t7 = claim_space(div5_nodes);
-			div4 = claim_element(div5_nodes, "DIV", { class: true });
-			var div4_nodes = children(div4);
-			div4_nodes.forEach(detach);
-			t8 = claim_space(div5_nodes);
 			h30 = claim_element(div5_nodes, "H3", { class: true });
 			var h30_nodes = children(h30);
-			t9 = claim_text(h30_nodes, "Stimme für ein Reiseziel");
+			t8 = claim_text(h30_nodes, "Stimme für ein Reiseziel");
 			h30_nodes.forEach(detach);
+			t9 = claim_space(div5_nodes);
+			div4 = claim_element(div5_nodes, "DIV", { class: true });
+			var div4_nodes = children(div4);
+			claim_component(voting_1.$$.fragment, div4_nodes);
+			div4_nodes.forEach(detach);
 			div5_nodes.forEach(detach);
 			div6_nodes.forEach(detach);
 			t10 = claim_space(nodes);
 			div8 = claim_element(nodes, "DIV", { class: true });
 			var div8_nodes = children(div8);
-			h31 = claim_element(div8_nodes, "H3", { class: true });
-			var h31_nodes = children(h31);
-			t11 = claim_text(h31_nodes, "Wann kann wer?");
-			h31_nodes.forEach(detach);
-			t12 = claim_space(div8_nodes);
 			div7 = claim_element(div8_nodes, "DIV", { class: true, id: true });
 			children(div7).forEach(detach);
+			t11 = claim_space(div8_nodes);
+			h31 = claim_element(div8_nodes, "H3", { class: true });
+			var h31_nodes = children(h31);
+			t12 = claim_text(h31_nodes, "Trage ein, wann du kannst");
+			h31_nodes.forEach(detach);
 			div8_nodes.forEach(detach);
 			this.h();
 		},
 		h() {
-			attr(h20, "class", "title svelte-14l9no9");
-			attr(h21, "class", "group-name svelte-14l9no9");
-			attr(div0, "class", "left svelte-14l9no9");
-			attr(textarea, "class", "description svelte-14l9no9");
-			textarea.value = /*description*/ ctx[3];
-			attr(div1, "class", "right svelte-14l9no9");
-			attr(div2, "class", "content svelte-14l9no9");
-			attr(header, "class", "svelte-14l9no9");
-			attr(div3, "class", "map svelte-14l9no9");
+			attr(h20, "class", "title svelte-1yztybm");
+			attr(h21, "class", "group-name svelte-1yztybm");
+			attr(div0, "class", "left svelte-1yztybm");
+			attr(textarea, "class", "description svelte-1yztybm");
+			textarea.value = /*description*/ ctx[4];
+			attr(div1, "class", "right svelte-1yztybm");
+			attr(div2, "class", "content svelte-1yztybm");
+			attr(header, "class", "svelte-1yztybm");
+			attr(div3, "class", "map svelte-1yztybm");
 			attr(div3, "id", "map");
+			attr(h30, "class", "small-title svelte-1yztybm");
 			attr(div4, "class", "targets");
-			attr(h30, "class", "small-title svelte-14l9no9");
-			attr(div5, "class", "content svelte-14l9no9");
-			attr(div6, "class", "gray-bg svelte-14l9no9");
-			attr(h31, "class", "small-title svelte-14l9no9");
-			attr(div7, "class", "timeline svelte-14l9no9");
+			attr(div5, "class", "content svelte-1yztybm");
+			attr(div6, "class", "gray-bg svelte-1yztybm");
+			attr(div7, "class", "timeline svelte-1yztybm");
 			attr(div7, "id", "timeline");
-			attr(div8, "class", "content svelte-14l9no9");
+			attr(h31, "class", "small-title svelte-1yztybm");
+			attr(div8, "class", "content svelte-1yztybm");
 		},
 		m(target, anchor) {
 			mount_component(mapview, target, anchor);
@@ -207,16 +214,17 @@ function create_fragment(ctx) {
 			append_hydration(div6, div5);
 			append_hydration(div5, div3);
 			append_hydration(div5, t7);
-			append_hydration(div5, div4);
-			append_hydration(div5, t8);
 			append_hydration(div5, h30);
-			append_hydration(h30, t9);
+			append_hydration(h30, t8);
+			append_hydration(div5, t9);
+			append_hydration(div5, div4);
+			mount_component(voting_1, div4, null);
 			insert_hydration(target, t10, anchor);
 			insert_hydration(target, div8, anchor);
-			append_hydration(div8, h31);
-			append_hydration(h31, t11);
-			append_hydration(div8, t12);
 			append_hydration(div8, div7);
+			append_hydration(div8, t11);
+			append_hydration(div8, h31);
+			append_hydration(h31, t12);
 			current = true;
 		},
 		p(ctx, [dirty]) {
@@ -224,33 +232,40 @@ function create_fragment(ctx) {
 			mapview.$set(mapview_changes);
 			const timeline_1_changes = {};
 			timeline_1.$set(timeline_1_changes);
-			if (!current || dirty & /*groupName*/ 4) set_data(t4, /*groupName*/ ctx[2]);
+			if (!current || dirty & /*groupName*/ 8) set_data(t4, /*groupName*/ ctx[3]);
 
-			if (!current || dirty & /*description*/ 8) {
-				textarea.value = /*description*/ ctx[3];
+			if (!current || dirty & /*description*/ 16) {
+				textarea.value = /*description*/ ctx[4];
 			}
+
+			const voting_1_changes = {};
+			voting_1.$set(voting_1_changes);
 		},
 		i(local) {
 			if (current) return;
 			transition_in(mapview.$$.fragment, local);
 			transition_in(timeline_1.$$.fragment, local);
+			transition_in(voting_1.$$.fragment, local);
 			current = true;
 		},
 		o(local) {
 			transition_out(mapview.$$.fragment, local);
 			transition_out(timeline_1.$$.fragment, local);
+			transition_out(voting_1.$$.fragment, local);
 			current = false;
 		},
 		d(detaching) {
-			/*mapview_binding*/ ctx[4](null);
+			/*mapview_binding*/ ctx[5](null);
 			destroy_component(mapview, detaching);
 			if (detaching) detach(t0);
-			/*timeline_1_binding*/ ctx[5](null);
+			/*timeline_1_binding*/ ctx[6](null);
 			destroy_component(timeline_1, detaching);
 			if (detaching) detach(t1);
 			if (detaching) detach(header);
 			if (detaching) detach(t6);
 			if (detaching) detach(div6);
+			/*voting_1_binding*/ ctx[7](null);
+			destroy_component(voting_1);
 			if (detaching) detach(t10);
 			if (detaching) detach(div8);
 		}
@@ -258,7 +273,7 @@ function create_fragment(ctx) {
 }
 
 function instance($$self, $$props, $$invalidate) {
-	let mapView, timeline, webSocket;
+	let mapView, timeline, voting, webSocket;
 	let groupName = "Lädt...";
 	let description = "Lädt...";
 
@@ -278,11 +293,11 @@ function instance($$self, $$props, $$invalidate) {
 			}
 
 			initial = false;
-			console.log(event.data);
 			const group = JSON.parse(event.data);
-			$$invalidate(2, groupName = group.name);
-			$$invalidate(3, description = group.description);
+			$$invalidate(3, groupName = group.name);
+			$$invalidate(4, description = group.description);
 			mapView.create(group.targets);
+			voting.create(group.targets);
 			timeline.create(group.dates);
 		});
 	});
@@ -301,7 +316,23 @@ function instance($$self, $$props, $$invalidate) {
 		});
 	}
 
-	return [mapView, timeline, groupName, description, mapview_binding, timeline_1_binding];
+	function voting_1_binding($$value) {
+		binding_callbacks[$$value ? 'unshift' : 'push'](() => {
+			voting = $$value;
+			$$invalidate(2, voting);
+		});
+	}
+
+	return [
+		mapView,
+		timeline,
+		voting,
+		groupName,
+		description,
+		mapview_binding,
+		timeline_1_binding,
+		voting_1_binding
+	];
 }
 
 class Component extends SvelteComponent {

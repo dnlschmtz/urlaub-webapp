@@ -12,6 +12,20 @@
             var marker = L.marker([element.x, element.y]).addTo(map);
             marker.bindPopup(element.name + " - " + element.votes + " Stimmen");
         });
+
+        var popup = L.popup();
+
+        function onMapClick(e) {
+            var coords = e.latlng.toString().split(",");
+            var x = coords[0].replace("LatLng(", "");
+            var y = coords[1].replace(")", "");
+            
+            popup.setLatLng(e.latlng)
+                .setContent("<input type=\"text\" id=\"dst-name\" placeholder=\"Name\" style=\"margin-bottom:0px\"></input><a class=\"add-target\" onclick=\"addDestination(" + x + "," + y + ")\">Hinzufügen</a>")
+                .openOn(map);
+        }
+        
+        map.on("click", onMapClick);
     }
 
     function update() {
