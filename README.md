@@ -44,6 +44,8 @@ Tutorials zum Einarbeiten in die Funktionen von Deno
 
 -https://www.youtube.com/watch?v=n8Kk7uvsx9A
 
+-https://www.youtube.com/watch?v=8VLojVFUt5U&list=PLH1gH0TmFBBhWp2pn6vRhUVVC1txQuTZE
+
 ## Zum Bauen der Svelte-App
 ```
 novas build
