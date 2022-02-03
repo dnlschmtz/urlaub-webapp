@@ -26,8 +26,12 @@
             }
             initial = false;
 
-            groupName = "Testgruppe";
-            description = "Beschreibung der Reise";
+            console.log(event.data)
+
+            const group = JSON.parse(event.data);
+
+            groupName = group.name;
+            description = group.description;
 
             mapView.create();
             timeline.create();
@@ -71,6 +75,13 @@
         font-family: "Roboto";
     }
 
+    .small-title {
+        font-size: 1.7rem;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        font-family: "Raleway";
+    }
+
     .content {
         width: 100%;
         max-width: 1200px;
@@ -102,6 +113,7 @@
         width: 100%;
         padding: 50px 0px;
         background-color: #e5e5e5;
+        margin-bottom: 50px;
     }
 
     .map {
@@ -110,7 +122,6 @@
     }
 
     .timeline {
-        margin-top: 50px;
         height: 420px;
         width: 100%;
     }
@@ -144,9 +155,15 @@
 <div class="gray-bg">
     <div class="content">
         <div class="map" id="map"></div>
+        <div class="targets">
+            
+        </div>
+
+        <h3 class="small-title">Stimme für ein Reiseziel</h3>
     </div>
 </div>
 
 <div class="content">
+    <h3 class="small-title">Wann kann wer?</h3>
     <div class="timeline" id="timeline"></div>
 </div>
