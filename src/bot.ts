@@ -1,5 +1,15 @@
 import { TelegramBot, UpdateType } from "https://deno.land/x/telegram_chatbot/mod.ts"
 import "https://deno.land/x/dot_env@0.2.0/load.ts"
+import { Bson } from "https://deno.land/x/mongo@v0.29.1/mod.ts";
+import "https://deno.land/x/dotenv/load.ts";
+import { assertNotEquals } from "https://deno.land/std@0.86.0/testing/asserts.ts"
+
+import { MongoDBConnector } from "./database/mongodb-connector.ts";
+
+
+// Read MongoDB URL from .env file
+//const MONGO_DB_URL = Deno.env.get("MONGO_DB_URL");
+//if (!MONGO_DB_URL) throw new Error("MONGO_DB_URL is not provided");
 
 
 export function createTelegramBot(token: string) {
@@ -13,10 +23,28 @@ export function createTelegramBot(token: string) {
         console.log(text);
 
         if(text.startsWith("newgroup")) {
-
             let antwort = text.replace("newgroup", "");
+
+            const MONGO_DB_URL = Deno.env.get("MONGO_DB_URL");
+            if (!MONGO_DB_URL) throw new Error("MONGO_DB_URL is not provided");
+
+            const mongodb = new MongoDBConnector(MONGO_DB_URL);
+
+            await mongodb.connect();
+
+            let id: Bson.ObjectId | undefined;
+
+            id = await mongodb.insert({
+                name: antwort,
+                description: "",
+                targets: [],
+                dates: []
+                });
+
+
             await bot.sendMessage({ chat_id: message.message.chat.id, text: `Neue Gruppe ${antwort} erstellt` })
-            await bot.sendMessage({ chat_id: message.message.chat.id, text: '[Klicke hier auf auf deine Gruppenseite zu kommen](https://www.latlmes.com/opinion/teenagers-spend-their-time-using-their-phones-is-it-worth-it-1)', parse_mode:'MarkdownV2' })
+            await bot.sendMessage({ chat_id: message.message.chat.id, text: '[Klicke hier auf auf deine Gruppenseite zu kommen](https://localhost:3000/?id=${id})', parse_mode:'MarkdownV2' })
+            console.log(id);
             return;
         }
         if(text.startsWith("info")) {
