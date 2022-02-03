@@ -20,7 +20,7 @@ Anschließend wurde der Telegrambot mithilfe des Botfathers initiiert. Dann wurd
 Das Backend der Webapp wurde dann mit Mongo von Mongodb erstellt.
 
 ## Einarbeiten in Deno
-Tutorials zum Einarbeiten in die Funktionen von Deno
+Basic Tutorials zu den Funktionen von Deno
 
 -https://www.youtube.com/watch?v=2iLeRzHvc10
 
@@ -34,7 +34,8 @@ Tutorials zum Einarbeiten in die Funktionen von Deno
 
 -https://www.youtube.com/watch?v=zkFuAZsEEUc
 
-## Einarbeiten in Svelte
+## Svelte Beginnings
+Tutorials zum Einarbeiten in die Funktionen von Svelte
 
 -https://www.youtube.com/watch?v=zojEMeQGGHs
 
@@ -51,6 +52,7 @@ Tutorials zum Einarbeiten in die Funktionen von Deno
 novas build
 ```
 ## Mongodb Basics
+Tutorials zum Einarbeiten in die Funktionen von Mongodb
 
 -https://www.youtube.com/watch?v=pWbMrx5rVBE
 
