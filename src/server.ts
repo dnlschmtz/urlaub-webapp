@@ -4,8 +4,7 @@ import { dirname, join } from "https://deno.land/x/opine@2.1.1/deps.ts";
 
 const handleWebsocket = (socket: WebSocket) => {
     socket.addEventListener("open", (_) => {
-        socket.send("ping");
-        console.log("sent ping to client");
+        console.log("socket opened");
     });
 
     socket.addEventListener("close", (_) => {
@@ -13,8 +12,23 @@ const handleWebsocket = (socket: WebSocket) => {
     });
 
     socket.addEventListener("message", (e) => {
-        if(e.data == "command") {
-            console.log("Received a message");
+        console.log(e.data);
+        const args = e.data.split(" ");
+
+        if(args.length < 1) {
+            return;
+        }
+
+        switch(args[0].toLowerCase()) {
+            case "fetch-group":
+                socket.send("{}");
+                break;
+
+            case "update-group":
+                break;
+
+            default:
+                console.log("Got invalid WebSocket input: " + e.data);
         }
     });
 }

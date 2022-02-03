@@ -3,14 +3,35 @@
     import MapView from "./components/MapView.svelte";
     import Timeline from "./components/Timeline.svelte";
 
-    let mapView, timeline;
+    let mapView, timeline, webSocket;
 
-    let groupName = "Testgruppe";
-    let description = "Beschreibung der Reise";
+    let groupName = "Lädt...";
+    let description = "Lädt...";
 
     onMount(function() {
-        mapView.create();
-        timeline.create();
+        webSocket = new WebSocket("ws://localhost:3000/ws");
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get("id"); 
+
+        let initial = true;
+
+        webSocket.addEventListener("open", () => {
+            webSocket.send("fetch-group " + id);
+        });
+
+        webSocket.addEventListener("message", function (event) {
+            if (!initial) {
+                return;
+            }
+            initial = false;
+
+            groupName = "Testgruppe";
+            description = "Beschreibung der Reise";
+
+            mapView.create();
+            timeline.create();
+        });
     });
 </script>
 
