@@ -1,6 +1,6 @@
 import App from './src/App.svelte.js';
 
-const socket = new WebSocket("ws://localhost:3000/ws");
+const socket = new WebSocket("ws://localhost:80");
 
 const reloadWindow = () => {
   window.location.reload();
@@ -14,8 +14,6 @@ socket.addEventListener("message", function (event) {
   if (event.data === 'reload window') {
     reloadWindow();
   }
-
-  console.log(event.data)
 });
 
 const app = new App({
