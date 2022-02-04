@@ -49,8 +49,8 @@
         let marker = L.marker([curX, curY]).addTo(map);
         let name = popupContent.querySelector("#add-name").value;
 
-        marker.bindPopup(name + " - " + "0" + " Stimmen");
         webSocket.send("update-targets " + groupId + " " + name + " " + curX + " " + curY);
+        location.reload();
     }
 </script>
 

@@ -23,18 +23,18 @@ import {
 } from "https://cdn.skypack.dev/svelte@3.44.1/internal";
 
 function add_css(target) {
-	append_styles(target, "svelte-up1g68", ".vote.svelte-up1g68.svelte-up1g68{display:inline-block;width:33%;min-width:200px}.vote.svelte-up1g68 p.svelte-up1g68{float:left;margin:0px}.vote.svelte-up1g68 input.svelte-up1g68{float:right}.submit.svelte-up1g68.svelte-up1g68{float:right}.submit.svelte-up1g68.svelte-up1g68:hover{cursor:pointer}");
+	append_styles(target, "svelte-9xskd2", ".vote.svelte-9xskd2.svelte-9xskd2{display:inline-block;width:33%;min-width:200px}.vote.svelte-9xskd2 p.svelte-9xskd2{float:left;margin:0px;margin-left:10px}.vote.svelte-9xskd2 input.svelte-9xskd2{float:right}.submit.svelte-9xskd2.svelte-9xskd2{float:right}.submit.svelte-9xskd2.svelte-9xskd2:hover{cursor:pointer}");
 }
 
 function get_each_context(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[2] = list[i].name;
-	child_ctx[3] = list[i].count;
-	child_ctx[5] = i;
+	child_ctx[8] = list[i].name;
+	child_ctx[9] = list[i].count;
+	child_ctx[11] = i;
 	return child_ctx;
 }
 
-// (42:0) {#if votes.length != 0}
+// (48:0) {#if votes.length != 0}
 function create_if_block(ctx) {
 	let t0;
 	let h5;
@@ -72,7 +72,7 @@ function create_if_block(ctx) {
 			this.h();
 		},
 		h() {
-			attr(h5, "class", "submit svelte-up1g68");
+			attr(h5, "class", "submit svelte-9xskd2");
 		},
 		m(target, anchor) {
 			for (let i = 0; i < each_blocks.length; i += 1) {
@@ -84,12 +84,12 @@ function create_if_block(ctx) {
 			append_hydration(h5, t1);
 
 			if (!mounted) {
-				dispose = listen(h5, "click", vote);
+				dispose = listen(h5, "click", /*vote*/ ctx[2]);
 				mounted = true;
 			}
 		},
 		p(ctx, dirty) {
-			if (dirty & /*votes*/ 1) {
+			if (dirty & /*votes, selected*/ 3) {
 				each_value = /*votes*/ ctx[0];
 				let i;
 
@@ -122,19 +122,21 @@ function create_if_block(ctx) {
 	};
 }
 
-// (43:4) {#each votes as {name, count}
+// (49:4) {#each votes as {name, count}
 function create_each_block(ctx) {
 	let div;
 	let p;
-	let t0_value = /*name*/ ctx[2] + "";
+	let t0_value = /*name*/ ctx[8] + "";
 	let t0;
 	let t1;
-	let t2_value = /*count*/ ctx[3] + "";
+	let t2_value = /*count*/ ctx[9] + "";
 	let t2;
 	let t3;
 	let t4;
 	let input;
-	let input_id_value;
+	let input_value_value;
+	let mounted;
+	let dispose;
 
 	return {
 		c() {
@@ -159,24 +161,19 @@ function create_each_block(ctx) {
 			t3 = claim_text(p_nodes, " Stimmen");
 			p_nodes.forEach(detach);
 			t4 = claim_space(div_nodes);
-
-			input = claim_element(div_nodes, "INPUT", {
-				type: true,
-				name: true,
-				id: true,
-				class: true
-			});
-
+			input = claim_element(div_nodes, "INPUT", { type: true, name: true, class: true });
 			div_nodes.forEach(detach);
 			this.h();
 		},
 		h() {
-			attr(p, "class", "svelte-up1g68");
+			attr(p, "class", "svelte-9xskd2");
 			attr(input, "type", "radio");
-			attr(input, "name", "vote");
-			attr(input, "id", input_id_value = "vote-" + /*name*/ ctx[2]);
-			attr(input, "class", "svelte-up1g68");
-			attr(div, "class", "vote svelte-up1g68");
+			attr(input, "name", "selected");
+			input.__value = input_value_value = /*name*/ ctx[8];
+			input.value = input.__value;
+			attr(input, "class", "svelte-9xskd2");
+			/*$$binding_groups*/ ctx[5][0].push(input);
+			attr(div, "class", "vote svelte-9xskd2");
 		},
 		m(target, anchor) {
 			insert_hydration(target, div, anchor);
@@ -187,17 +184,31 @@ function create_each_block(ctx) {
 			append_hydration(p, t3);
 			append_hydration(div, t4);
 			append_hydration(div, input);
+			input.checked = input.__value === /*selected*/ ctx[1];
+
+			if (!mounted) {
+				dispose = listen(input, "change", /*input_change_handler*/ ctx[4]);
+				mounted = true;
+			}
 		},
 		p(ctx, dirty) {
-			if (dirty & /*votes*/ 1 && t0_value !== (t0_value = /*name*/ ctx[2] + "")) set_data(t0, t0_value);
-			if (dirty & /*votes*/ 1 && t2_value !== (t2_value = /*count*/ ctx[3] + "")) set_data(t2, t2_value);
+			if (dirty & /*votes*/ 1 && t0_value !== (t0_value = /*name*/ ctx[8] + "")) set_data(t0, t0_value);
+			if (dirty & /*votes*/ 1 && t2_value !== (t2_value = /*count*/ ctx[9] + "")) set_data(t2, t2_value);
 
-			if (dirty & /*votes*/ 1 && input_id_value !== (input_id_value = "vote-" + /*name*/ ctx[2])) {
-				attr(input, "id", input_id_value);
+			if (dirty & /*votes*/ 1 && input_value_value !== (input_value_value = /*name*/ ctx[8])) {
+				input.__value = input_value_value;
+				input.value = input.__value;
+			}
+
+			if (dirty & /*selected*/ 2) {
+				input.checked = input.__value === /*selected*/ ctx[1];
 			}
 		},
 		d(detaching) {
 			if (detaching) detach(div);
+			/*$$binding_groups*/ ctx[5][0].splice(/*$$binding_groups*/ ctx[5][0].indexOf(input), 1);
+			mounted = false;
+			dispose();
 		}
 	};
 }
@@ -242,14 +253,14 @@ function create_fragment(ctx) {
 	};
 }
 
-function vote() {
-	alert("vote");
-}
-
 function instance($$self, $$props, $$invalidate) {
 	let votes = [];
+	let webSocket, groupId;
+	let selected;
 
-	function create(targets) {
+	function create(targets, webSock, id) {
+		webSocket = webSock;
+		groupId = id;
 		$$invalidate(0, votes = []);
 
 		targets.forEach(element => {
@@ -257,17 +268,29 @@ function instance($$self, $$props, $$invalidate) {
 		});
 	}
 
-	return [votes, create];
+	function vote() {
+		webSocket.send("update-votes " + groupId + " " + selected);
+		location.reload();
+	}
+
+	const $$binding_groups = [[]];
+
+	function input_change_handler() {
+		selected = this.__value;
+		$$invalidate(1, selected);
+	}
+
+	return [votes, selected, vote, create, input_change_handler, $$binding_groups];
 }
 
 class Component extends SvelteComponent {
 	constructor(options) {
 		super();
-		init(this, options, instance, create_fragment, safe_not_equal, { create: 1 }, add_css);
+		init(this, options, instance, create_fragment, safe_not_equal, { create: 3 }, add_css);
 	}
 
 	get create() {
-		return this.$$.ctx[1];
+		return this.$$.ctx[3];
 	}
 }
 

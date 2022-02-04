@@ -1,6 +1,7 @@
 <script>
     let votes = [];
     let webSocket, groupId;
+    let selected;
     
     export function create(targets, webSock, id) {
         webSocket = webSock;
@@ -16,8 +17,8 @@
     }
 
     function vote() {
-        alert("vote");
-
+        webSocket.send("update-votes " + groupId + " " + selected);
+        location.reload();
     }
 </script>
 
@@ -31,6 +32,7 @@
     .vote p {
         float: left;
         margin: 0px;
+        margin-left: 10px;
     }
     .vote input {
         float: right;
@@ -47,7 +49,7 @@
     {#each votes as {name, count}, i}
         <div class="vote">
             <p>{name} - {count} Stimmen</p>
-            <input type="radio" name="vote" id="vote-{name}"/>
+            <input type="radio" name="selected" bind:group={selected} value={name}/>
         </div>
     {/each}
 

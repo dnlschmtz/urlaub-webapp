@@ -276,7 +276,7 @@ function instance($$self, $$props, $$invalidate) {
 
 	function addDate() {
 		//alert(name+ " " + start+ " " + end);
-		webSocket.send("update-votes " + groupId + " " + name + " " + start + " " + end);
+		webSocket.send("update-dates " + groupId + " " + name + " " + start + " " + end);
 
 		location.reload();
 	}

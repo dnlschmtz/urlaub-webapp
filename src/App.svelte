@@ -37,7 +37,7 @@
             description = group.description;
 
             mapView.setTargets(group.targets);
-            voting.create(group.targets);
+            voting.create(group.targets, webSocket, groupId);
             timeline.create(group.dates, webSocket, groupId);
         });
     });
