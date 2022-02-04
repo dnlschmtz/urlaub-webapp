@@ -2,6 +2,7 @@
 import {
 	SvelteComponent,
 	append_hydration,
+	append_styles,
 	attr,
 	children,
 	claim_element,
@@ -13,12 +14,17 @@ import {
 	empty,
 	init,
 	insert_hydration,
+	listen,
 	noop,
 	safe_not_equal,
 	set_data,
 	space,
 	text
 } from "https://cdn.skypack.dev/svelte@3.44.1/internal";
+
+function add_css(target) {
+	append_styles(target, "svelte-up1g68", ".vote.svelte-up1g68.svelte-up1g68{display:inline-block;width:33%;min-width:200px}.vote.svelte-up1g68 p.svelte-up1g68{float:left;margin:0px}.vote.svelte-up1g68 input.svelte-up1g68{float:right}.submit.svelte-up1g68.svelte-up1g68{float:right}.submit.svelte-up1g68.svelte-up1g68:hover{cursor:pointer}");
+}
 
 function get_each_context(ctx, list, i) {
 	const child_ctx = ctx.slice();
@@ -28,68 +34,13 @@ function get_each_context(ctx, list, i) {
 	return child_ctx;
 }
 
-// (17:0) {#each votes as {name, count}
-function create_each_block(ctx) {
-	let p;
-	let t0_value = /*name*/ ctx[2] + "";
+// (42:0) {#if votes.length != 0}
+function create_if_block(ctx) {
 	let t0;
+	let h5;
 	let t1;
-	let t2_value = /*count*/ ctx[3] + "";
-	let t2;
-	let t3;
-	let t4;
-	let input;
-
-	return {
-		c() {
-			p = element("p");
-			t0 = text(t0_value);
-			t1 = text(" - ");
-			t2 = text(t2_value);
-			t3 = text(" Stimmen");
-			t4 = space();
-			input = element("input");
-			this.h();
-		},
-		l(nodes) {
-			p = claim_element(nodes, "P", {});
-			var p_nodes = children(p);
-			t0 = claim_text(p_nodes, t0_value);
-			t1 = claim_text(p_nodes, " - ");
-			t2 = claim_text(p_nodes, t2_value);
-			t3 = claim_text(p_nodes, " Stimmen");
-			p_nodes.forEach(detach);
-			t4 = claim_space(nodes);
-			input = claim_element(nodes, "INPUT", { type: true, id: true });
-			this.h();
-		},
-		h() {
-			attr(input, "type", "radio");
-			attr(input, "id", "vote");
-		},
-		m(target, anchor) {
-			insert_hydration(target, p, anchor);
-			append_hydration(p, t0);
-			append_hydration(p, t1);
-			append_hydration(p, t2);
-			append_hydration(p, t3);
-			insert_hydration(target, t4, anchor);
-			insert_hydration(target, input, anchor);
-		},
-		p(ctx, dirty) {
-			if (dirty & /*votes*/ 1 && t0_value !== (t0_value = /*name*/ ctx[2] + "")) set_data(t0, t0_value);
-			if (dirty & /*votes*/ 1 && t2_value !== (t2_value = /*count*/ ctx[3] + "")) set_data(t2, t2_value);
-		},
-		d(detaching) {
-			if (detaching) detach(p);
-			if (detaching) detach(t4);
-			if (detaching) detach(input);
-		}
-	};
-}
-
-function create_fragment(ctx) {
-	let each_1_anchor;
+	let mounted;
+	let dispose;
 	let each_value = /*votes*/ ctx[0];
 	let each_blocks = [];
 
@@ -103,23 +54,41 @@ function create_fragment(ctx) {
 				each_blocks[i].c();
 			}
 
-			each_1_anchor = empty();
+			t0 = space();
+			h5 = element("h5");
+			t1 = text("Abstimmen");
+			this.h();
 		},
 		l(nodes) {
 			for (let i = 0; i < each_blocks.length; i += 1) {
 				each_blocks[i].l(nodes);
 			}
 
-			each_1_anchor = empty();
+			t0 = claim_space(nodes);
+			h5 = claim_element(nodes, "H5", { class: true });
+			var h5_nodes = children(h5);
+			t1 = claim_text(h5_nodes, "Abstimmen");
+			h5_nodes.forEach(detach);
+			this.h();
+		},
+		h() {
+			attr(h5, "class", "submit svelte-up1g68");
 		},
 		m(target, anchor) {
 			for (let i = 0; i < each_blocks.length; i += 1) {
 				each_blocks[i].m(target, anchor);
 			}
 
-			insert_hydration(target, each_1_anchor, anchor);
+			insert_hydration(target, t0, anchor);
+			insert_hydration(target, h5, anchor);
+			append_hydration(h5, t1);
+
+			if (!mounted) {
+				dispose = listen(h5, "click", vote);
+				mounted = true;
+			}
 		},
-		p(ctx, [dirty]) {
+		p(ctx, dirty) {
 			if (dirty & /*votes*/ 1) {
 				each_value = /*votes*/ ctx[0];
 				let i;
@@ -132,7 +101,7 @@ function create_fragment(ctx) {
 					} else {
 						each_blocks[i] = create_each_block(child_ctx);
 						each_blocks[i].c();
-						each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
+						each_blocks[i].m(t0.parentNode, t0);
 					}
 				}
 
@@ -143,13 +112,138 @@ function create_fragment(ctx) {
 				each_blocks.length = each_value.length;
 			}
 		},
+		d(detaching) {
+			destroy_each(each_blocks, detaching);
+			if (detaching) detach(t0);
+			if (detaching) detach(h5);
+			mounted = false;
+			dispose();
+		}
+	};
+}
+
+// (43:4) {#each votes as {name, count}
+function create_each_block(ctx) {
+	let div;
+	let p;
+	let t0_value = /*name*/ ctx[2] + "";
+	let t0;
+	let t1;
+	let t2_value = /*count*/ ctx[3] + "";
+	let t2;
+	let t3;
+	let t4;
+	let input;
+	let input_id_value;
+
+	return {
+		c() {
+			div = element("div");
+			p = element("p");
+			t0 = text(t0_value);
+			t1 = text(" - ");
+			t2 = text(t2_value);
+			t3 = text(" Stimmen");
+			t4 = space();
+			input = element("input");
+			this.h();
+		},
+		l(nodes) {
+			div = claim_element(nodes, "DIV", { class: true });
+			var div_nodes = children(div);
+			p = claim_element(div_nodes, "P", { class: true });
+			var p_nodes = children(p);
+			t0 = claim_text(p_nodes, t0_value);
+			t1 = claim_text(p_nodes, " - ");
+			t2 = claim_text(p_nodes, t2_value);
+			t3 = claim_text(p_nodes, " Stimmen");
+			p_nodes.forEach(detach);
+			t4 = claim_space(div_nodes);
+
+			input = claim_element(div_nodes, "INPUT", {
+				type: true,
+				name: true,
+				id: true,
+				class: true
+			});
+
+			div_nodes.forEach(detach);
+			this.h();
+		},
+		h() {
+			attr(p, "class", "svelte-up1g68");
+			attr(input, "type", "radio");
+			attr(input, "name", "vote");
+			attr(input, "id", input_id_value = "vote-" + /*name*/ ctx[2]);
+			attr(input, "class", "svelte-up1g68");
+			attr(div, "class", "vote svelte-up1g68");
+		},
+		m(target, anchor) {
+			insert_hydration(target, div, anchor);
+			append_hydration(div, p);
+			append_hydration(p, t0);
+			append_hydration(p, t1);
+			append_hydration(p, t2);
+			append_hydration(p, t3);
+			append_hydration(div, t4);
+			append_hydration(div, input);
+		},
+		p(ctx, dirty) {
+			if (dirty & /*votes*/ 1 && t0_value !== (t0_value = /*name*/ ctx[2] + "")) set_data(t0, t0_value);
+			if (dirty & /*votes*/ 1 && t2_value !== (t2_value = /*count*/ ctx[3] + "")) set_data(t2, t2_value);
+
+			if (dirty & /*votes*/ 1 && input_id_value !== (input_id_value = "vote-" + /*name*/ ctx[2])) {
+				attr(input, "id", input_id_value);
+			}
+		},
+		d(detaching) {
+			if (detaching) detach(div);
+		}
+	};
+}
+
+function create_fragment(ctx) {
+	let if_block_anchor;
+	let if_block = /*votes*/ ctx[0].length != 0 && create_if_block(ctx);
+
+	return {
+		c() {
+			if (if_block) if_block.c();
+			if_block_anchor = empty();
+		},
+		l(nodes) {
+			if (if_block) if_block.l(nodes);
+			if_block_anchor = empty();
+		},
+		m(target, anchor) {
+			if (if_block) if_block.m(target, anchor);
+			insert_hydration(target, if_block_anchor, anchor);
+		},
+		p(ctx, [dirty]) {
+			if (/*votes*/ ctx[0].length != 0) {
+				if (if_block) {
+					if_block.p(ctx, dirty);
+				} else {
+					if_block = create_if_block(ctx);
+					if_block.c();
+					if_block.m(if_block_anchor.parentNode, if_block_anchor);
+				}
+			} else if (if_block) {
+				if_block.d(1);
+				if_block = null;
+			}
+		},
 		i: noop,
 		o: noop,
 		d(detaching) {
-			destroy_each(each_blocks, detaching);
-			if (detaching) detach(each_1_anchor);
+			if (if_block) if_block.d(detaching);
+			if (detaching) detach(if_block_anchor);
 		}
 	};
+}
+
+function vote() {
+	alert("vote");
 }
 
 function instance($$self, $$props, $$invalidate) {
@@ -169,7 +263,7 @@ function instance($$self, $$props, $$invalidate) {
 class Component extends SvelteComponent {
 	constructor(options) {
 		super();
-		init(this, options, instance, create_fragment, safe_not_equal, { create: 1 });
+		init(this, options, instance, create_fragment, safe_not_equal, { create: 1 }, add_css);
 	}
 
 	get create() {

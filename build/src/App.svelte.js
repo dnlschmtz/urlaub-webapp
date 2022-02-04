@@ -16,9 +16,12 @@ import {
 	element,
 	init,
 	insert_hydration,
+	listen,
 	mount_component,
+	run_all,
 	safe_not_equal,
 	set_data,
+	set_input_value,
 	space,
 	text,
 	transition_in,
@@ -31,92 +34,82 @@ import Timeline from './components/Timeline.svelte.js';
 import Voting from './components/Voting.svelte.js';
 
 function add_css(target) {
-	append_styles(target, "svelte-1yztybm", "@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100&family=Roboto&display=swap');body{margin:0px;font-family:sans-serif}header.svelte-1yztybm{background-color:#1e2427;display:inline-flex;width:100%;min-height:500px;height:65vh;color:#fff}.title.svelte-1yztybm{font-size:5rem;font-weight:200;margin-bottom:0px;text-transform:uppercase;font-family:\"Raleway\"}.group-name.svelte-1yztybm{font-size:5rem;margin-top:0px;margin-bottom:3rem;text-transform:uppercase;font-family:\"Roboto\"}.small-title.svelte-1yztybm{font-size:1.7rem;margin-bottom:20px;text-transform:uppercase;font-family:\"Roboto\"}.content.svelte-1yztybm{width:100%;max-width:1200px;margin:auto}.left.svelte-1yztybm{width:50%;float:left}.right.svelte-1yztybm{width:50%;float:right}.description.svelte-1yztybm{background-color:#1e2427;font-family:\"Raleway\";font-size:1.3rem;font-weight:800;text-align:justify;color:#fff;padding:10px;width:100%;height:280px}.gray-bg.svelte-1yztybm{width:100%;padding:50px 0px;background-color:#e5e5e5}.map.svelte-1yztybm{width:100%;height:420px}.timeline.svelte-1yztybm{margin:50px 0px;min-height:420px;padding:10px;background-color:#e5e5e5;width:100%}@media only screen and (max-width: 1220px){body{font-size:12px}.content.svelte-1yztybm{margin:0px 20px}}");
+	append_styles(target, "svelte-egr90r", "@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100&family=Roboto&display=swap');body{margin:0px;font-family:sans-serif}header.svelte-egr90r{background-color:#1e2427;display:inline-flex;width:100%;min-height:500px;height:65vh;color:#fff}.title.svelte-egr90r{font-size:5rem;font-weight:200;margin-bottom:0px;text-transform:uppercase;font-family:\"Raleway\"}.group-name.svelte-egr90r{font-size:5rem;margin-top:0px;margin-bottom:3rem;text-transform:uppercase;font-family:\"Roboto\"}.small-title.svelte-egr90r{font-size:1.7rem;margin-bottom:20px;text-transform:uppercase;font-family:\"Roboto\"}.content.svelte-egr90r{width:100%;max-width:1200px;margin:auto}.left.svelte-egr90r{width:50%;float:left}.right.svelte-egr90r{width:50%;float:right}.description.svelte-egr90r{background-color:#1e2427;font-family:\"Raleway\";font-size:1.2rem;font-weight:800;text-align:justify;color:#eee;padding:15px;width:100%;height:260px}.description-save.svelte-egr90r{float:right;color:#ccc}.description-save.svelte-egr90r:hover{cursor:pointer;color:#eee}.gray-bg.svelte-egr90r{width:100%;padding:50px 0px;background-color:#e5e5e5}@media only screen and (max-width: 1220px){body{font-size:12px}.content.svelte-egr90r{margin:0px 20px}}");
 }
 
 function create_fragment(ctx) {
-	let mapview;
-	let t0;
-	let timeline_1;
-	let t1;
 	let header;
 	let div2;
 	let div0;
 	let h20;
+	let t0;
+	let t1;
+	let h21;
 	let t2;
 	let t3;
-	let h21;
-	let t4;
-	let t5;
 	let div1;
 	let textarea;
+	let t4;
+	let p;
+	let t5;
 	let t6;
-	let div6;
 	let div5;
-	let div3;
+	let div4;
+	let mapview;
 	let t7;
-	let h30;
+	let h3;
 	let t8;
 	let t9;
-	let div4;
+	let div3;
 	let voting_1;
 	let t10;
-	let div8;
-	let div7;
-	let t11;
-	let h31;
-	let t12;
+	let div6;
+	let timeline_1;
 	let current;
+	let mounted;
+	let dispose;
 	let mapview_props = {};
 	mapview = new MapView({ props: mapview_props });
-	/*mapview_binding*/ ctx[5](mapview);
-	let timeline_1_props = {};
-	timeline_1 = new Timeline({ props: timeline_1_props });
-	/*timeline_1_binding*/ ctx[6](timeline_1);
+	/*mapview_binding*/ ctx[7](mapview);
 	let voting_1_props = {};
 	voting_1 = new Voting({ props: voting_1_props });
-	/*voting_1_binding*/ ctx[7](voting_1);
+	/*voting_1_binding*/ ctx[8](voting_1);
+	let timeline_1_props = {};
+	timeline_1 = new Timeline({ props: timeline_1_props });
+	/*timeline_1_binding*/ ctx[9](timeline_1);
 
 	return {
 		c() {
-			create_component(mapview.$$.fragment);
-			t0 = space();
-			create_component(timeline_1.$$.fragment);
-			t1 = space();
 			header = element("header");
 			div2 = element("div");
 			div0 = element("div");
 			h20 = element("h2");
-			t2 = text("Eure Reise");
-			t3 = space();
+			t0 = text("Eure Reise");
+			t1 = space();
 			h21 = element("h2");
-			t4 = text(/*groupName*/ ctx[3]);
-			t5 = space();
+			t2 = text(/*groupName*/ ctx[3]);
+			t3 = space();
 			div1 = element("div");
 			textarea = element("textarea");
+			t4 = space();
+			p = element("p");
+			t5 = text("Beschreibung speichern");
 			t6 = space();
-			div6 = element("div");
 			div5 = element("div");
-			div3 = element("div");
+			div4 = element("div");
+			create_component(mapview.$$.fragment);
 			t7 = space();
-			h30 = element("h3");
+			h3 = element("h3");
 			t8 = text("Stimme für ein Reiseziel");
 			t9 = space();
-			div4 = element("div");
+			div3 = element("div");
 			create_component(voting_1.$$.fragment);
 			t10 = space();
-			div8 = element("div");
-			div7 = element("div");
-			t11 = space();
-			h31 = element("h3");
-			t12 = text("Trage ein, wann du kannst");
+			div6 = element("div");
+			create_component(timeline_1.$$.fragment);
 			this.h();
 		},
 		l(nodes) {
-			claim_component(mapview.$$.fragment, nodes);
-			t0 = claim_space(nodes);
-			claim_component(timeline_1.$$.fragment, nodes);
-			t1 = claim_space(nodes);
 			header = claim_element(nodes, "HEADER", { class: true });
 			var header_nodes = children(header);
 			div2 = claim_element(header_nodes, "DIV", { class: true });
@@ -125,166 +118,168 @@ function create_fragment(ctx) {
 			var div0_nodes = children(div0);
 			h20 = claim_element(div0_nodes, "H2", { class: true });
 			var h20_nodes = children(h20);
-			t2 = claim_text(h20_nodes, "Eure Reise");
+			t0 = claim_text(h20_nodes, "Eure Reise");
 			h20_nodes.forEach(detach);
-			t3 = claim_space(div0_nodes);
+			t1 = claim_space(div0_nodes);
 			h21 = claim_element(div0_nodes, "H2", { class: true });
 			var h21_nodes = children(h21);
-			t4 = claim_text(h21_nodes, /*groupName*/ ctx[3]);
+			t2 = claim_text(h21_nodes, /*groupName*/ ctx[3]);
 			h21_nodes.forEach(detach);
 			div0_nodes.forEach(detach);
-			t5 = claim_space(div2_nodes);
+			t3 = claim_space(div2_nodes);
 			div1 = claim_element(div2_nodes, "DIV", { class: true });
 			var div1_nodes = children(div1);
 			textarea = claim_element(div1_nodes, "TEXTAREA", { class: true });
 			children(textarea).forEach(detach);
+			t4 = claim_space(div1_nodes);
+			p = claim_element(div1_nodes, "P", { class: true });
+			var p_nodes = children(p);
+			t5 = claim_text(p_nodes, "Beschreibung speichern");
+			p_nodes.forEach(detach);
 			div1_nodes.forEach(detach);
 			div2_nodes.forEach(detach);
 			header_nodes.forEach(detach);
 			t6 = claim_space(nodes);
-			div6 = claim_element(nodes, "DIV", { class: true });
-			var div6_nodes = children(div6);
-			div5 = claim_element(div6_nodes, "DIV", { class: true });
+			div5 = claim_element(nodes, "DIV", { class: true });
 			var div5_nodes = children(div5);
-			div3 = claim_element(div5_nodes, "DIV", { class: true, id: true });
-			children(div3).forEach(detach);
-			t7 = claim_space(div5_nodes);
-			h30 = claim_element(div5_nodes, "H3", { class: true });
-			var h30_nodes = children(h30);
-			t8 = claim_text(h30_nodes, "Stimme für ein Reiseziel");
-			h30_nodes.forEach(detach);
-			t9 = claim_space(div5_nodes);
 			div4 = claim_element(div5_nodes, "DIV", { class: true });
 			var div4_nodes = children(div4);
-			claim_component(voting_1.$$.fragment, div4_nodes);
+			claim_component(mapview.$$.fragment, div4_nodes);
+			t7 = claim_space(div4_nodes);
+			h3 = claim_element(div4_nodes, "H3", { class: true });
+			var h3_nodes = children(h3);
+			t8 = claim_text(h3_nodes, "Stimme für ein Reiseziel");
+			h3_nodes.forEach(detach);
+			t9 = claim_space(div4_nodes);
+			div3 = claim_element(div4_nodes, "DIV", { class: true });
+			var div3_nodes = children(div3);
+			claim_component(voting_1.$$.fragment, div3_nodes);
+			div3_nodes.forEach(detach);
 			div4_nodes.forEach(detach);
 			div5_nodes.forEach(detach);
-			div6_nodes.forEach(detach);
 			t10 = claim_space(nodes);
-			div8 = claim_element(nodes, "DIV", { class: true });
-			var div8_nodes = children(div8);
-			div7 = claim_element(div8_nodes, "DIV", { class: true, id: true });
-			children(div7).forEach(detach);
-			t11 = claim_space(div8_nodes);
-			h31 = claim_element(div8_nodes, "H3", { class: true });
-			var h31_nodes = children(h31);
-			t12 = claim_text(h31_nodes, "Trage ein, wann du kannst");
-			h31_nodes.forEach(detach);
-			div8_nodes.forEach(detach);
+			div6 = claim_element(nodes, "DIV", { class: true });
+			var div6_nodes = children(div6);
+			claim_component(timeline_1.$$.fragment, div6_nodes);
+			div6_nodes.forEach(detach);
 			this.h();
 		},
 		h() {
-			attr(h20, "class", "title svelte-1yztybm");
-			attr(h21, "class", "group-name svelte-1yztybm");
-			attr(div0, "class", "left svelte-1yztybm");
-			attr(textarea, "class", "description svelte-1yztybm");
-			textarea.value = /*description*/ ctx[4];
-			attr(div1, "class", "right svelte-1yztybm");
-			attr(div2, "class", "content svelte-1yztybm");
-			attr(header, "class", "svelte-1yztybm");
-			attr(div3, "class", "map svelte-1yztybm");
-			attr(div3, "id", "map");
-			attr(h30, "class", "small-title svelte-1yztybm");
-			attr(div4, "class", "targets");
-			attr(div5, "class", "content svelte-1yztybm");
-			attr(div6, "class", "gray-bg svelte-1yztybm");
-			attr(div7, "class", "timeline svelte-1yztybm");
-			attr(div7, "id", "timeline");
-			attr(h31, "class", "small-title svelte-1yztybm");
-			attr(div8, "class", "content svelte-1yztybm");
+			attr(h20, "class", "title svelte-egr90r");
+			attr(h21, "class", "group-name svelte-egr90r");
+			attr(div0, "class", "left svelte-egr90r");
+			attr(textarea, "class", "description svelte-egr90r");
+			attr(p, "class", "description-save svelte-egr90r");
+			attr(div1, "class", "right svelte-egr90r");
+			attr(div2, "class", "content svelte-egr90r");
+			attr(header, "class", "svelte-egr90r");
+			attr(h3, "class", "small-title svelte-egr90r");
+			attr(div3, "class", "targets");
+			attr(div4, "class", "content svelte-egr90r");
+			attr(div5, "class", "gray-bg svelte-egr90r");
+			attr(div6, "class", "content svelte-egr90r");
 		},
 		m(target, anchor) {
-			mount_component(mapview, target, anchor);
-			insert_hydration(target, t0, anchor);
-			mount_component(timeline_1, target, anchor);
-			insert_hydration(target, t1, anchor);
 			insert_hydration(target, header, anchor);
 			append_hydration(header, div2);
 			append_hydration(div2, div0);
 			append_hydration(div0, h20);
-			append_hydration(h20, t2);
-			append_hydration(div0, t3);
+			append_hydration(h20, t0);
+			append_hydration(div0, t1);
 			append_hydration(div0, h21);
-			append_hydration(h21, t4);
-			append_hydration(div2, t5);
+			append_hydration(h21, t2);
+			append_hydration(div2, t3);
 			append_hydration(div2, div1);
 			append_hydration(div1, textarea);
+			set_input_value(textarea, /*description*/ ctx[4]);
+			append_hydration(div1, t4);
+			append_hydration(div1, p);
+			append_hydration(p, t5);
 			insert_hydration(target, t6, anchor);
-			insert_hydration(target, div6, anchor);
-			append_hydration(div6, div5);
-			append_hydration(div5, div3);
-			append_hydration(div5, t7);
-			append_hydration(div5, h30);
-			append_hydration(h30, t8);
-			append_hydration(div5, t9);
+			insert_hydration(target, div5, anchor);
 			append_hydration(div5, div4);
-			mount_component(voting_1, div4, null);
+			mount_component(mapview, div4, null);
+			append_hydration(div4, t7);
+			append_hydration(div4, h3);
+			append_hydration(h3, t8);
+			append_hydration(div4, t9);
+			append_hydration(div4, div3);
+			mount_component(voting_1, div3, null);
 			insert_hydration(target, t10, anchor);
-			insert_hydration(target, div8, anchor);
-			append_hydration(div8, div7);
-			append_hydration(div8, t11);
-			append_hydration(div8, h31);
-			append_hydration(h31, t12);
+			insert_hydration(target, div6, anchor);
+			mount_component(timeline_1, div6, null);
 			current = true;
+
+			if (!mounted) {
+				dispose = [
+					listen(textarea, "input", /*textarea_input_handler*/ ctx[6]),
+					listen(p, "click", /*updateDescription*/ ctx[5])
+				];
+
+				mounted = true;
+			}
 		},
 		p(ctx, [dirty]) {
-			const mapview_changes = {};
-			mapview.$set(mapview_changes);
-			const timeline_1_changes = {};
-			timeline_1.$set(timeline_1_changes);
-			if (!current || dirty & /*groupName*/ 8) set_data(t4, /*groupName*/ ctx[3]);
+			if (!current || dirty & /*groupName*/ 8) set_data(t2, /*groupName*/ ctx[3]);
 
-			if (!current || dirty & /*description*/ 16) {
-				textarea.value = /*description*/ ctx[4];
+			if (dirty & /*description*/ 16) {
+				set_input_value(textarea, /*description*/ ctx[4]);
 			}
 
+			const mapview_changes = {};
+			mapview.$set(mapview_changes);
 			const voting_1_changes = {};
 			voting_1.$set(voting_1_changes);
+			const timeline_1_changes = {};
+			timeline_1.$set(timeline_1_changes);
 		},
 		i(local) {
 			if (current) return;
 			transition_in(mapview.$$.fragment, local);
-			transition_in(timeline_1.$$.fragment, local);
 			transition_in(voting_1.$$.fragment, local);
+			transition_in(timeline_1.$$.fragment, local);
 			current = true;
 		},
 		o(local) {
 			transition_out(mapview.$$.fragment, local);
-			transition_out(timeline_1.$$.fragment, local);
 			transition_out(voting_1.$$.fragment, local);
+			transition_out(timeline_1.$$.fragment, local);
 			current = false;
 		},
 		d(detaching) {
-			/*mapview_binding*/ ctx[5](null);
-			destroy_component(mapview, detaching);
-			if (detaching) detach(t0);
-			/*timeline_1_binding*/ ctx[6](null);
-			destroy_component(timeline_1, detaching);
-			if (detaching) detach(t1);
 			if (detaching) detach(header);
 			if (detaching) detach(t6);
-			if (detaching) detach(div6);
-			/*voting_1_binding*/ ctx[7](null);
+			if (detaching) detach(div5);
+			/*mapview_binding*/ ctx[7](null);
+			destroy_component(mapview);
+			/*voting_1_binding*/ ctx[8](null);
 			destroy_component(voting_1);
 			if (detaching) detach(t10);
-			if (detaching) detach(div8);
+			if (detaching) detach(div6);
+			/*timeline_1_binding*/ ctx[9](null);
+			destroy_component(timeline_1);
+			mounted = false;
+			run_all(dispose);
 		}
 	};
 }
 
 function instance($$self, $$props, $$invalidate) {
-	let mapView, timeline, voting, webSocket;
+	let mapView, timeline, voting;
+	let webSocket;
+	let groupId;
+	let initial = true;
 	let groupName = "Lädt...";
 	let description = "Lädt...";
 
 	onMount(function () {
 		webSocket = new WebSocket("ws://localhost:3000/ws");
 		const urlParams = new URLSearchParams(window.location.search);
-		const id = urlParams.get("id");
-		let initial = true;
+		groupId = urlParams.get("id");
+		mapView.create(webSocket, groupId);
 
 		webSocket.addEventListener("open", () => {
-			webSocket.send("fetch-group " + id);
+			webSocket.send("fetch-group " + groupId);
 		});
 
 		webSocket.addEventListener("message", function (event) {
@@ -296,23 +291,26 @@ function instance($$self, $$props, $$invalidate) {
 			const group = JSON.parse(event.data);
 			$$invalidate(3, groupName = group.name);
 			$$invalidate(4, description = group.description);
-			mapView.create(group.targets);
+			mapView.setTargets(group.targets);
 			voting.create(group.targets);
-			timeline.create(group.dates);
+			timeline.create(group.dates, webSocket, groupId);
 		});
 	});
+
+	function updateDescription() {
+		webSocket.send("update-description " + groupId + " " + description);
+		location.reload();
+	}
+
+	function textarea_input_handler() {
+		description = this.value;
+		$$invalidate(4, description);
+	}
 
 	function mapview_binding($$value) {
 		binding_callbacks[$$value ? 'unshift' : 'push'](() => {
 			mapView = $$value;
 			$$invalidate(0, mapView);
-		});
-	}
-
-	function timeline_1_binding($$value) {
-		binding_callbacks[$$value ? 'unshift' : 'push'](() => {
-			timeline = $$value;
-			$$invalidate(1, timeline);
 		});
 	}
 
@@ -323,15 +321,24 @@ function instance($$self, $$props, $$invalidate) {
 		});
 	}
 
+	function timeline_1_binding($$value) {
+		binding_callbacks[$$value ? 'unshift' : 'push'](() => {
+			timeline = $$value;
+			$$invalidate(1, timeline);
+		});
+	}
+
 	return [
 		mapView,
 		timeline,
 		voting,
 		groupName,
 		description,
+		updateDescription,
+		textarea_input_handler,
 		mapview_binding,
-		timeline_1_binding,
-		voting_1_binding
+		voting_1_binding,
+		timeline_1_binding
 	];
 }
 

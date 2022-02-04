@@ -14,20 +14,40 @@ export const handleWebsocket = async (socket: WebSocket, mongoDB: MongoDBConnect
         console.log(e.data);
         const args = e.data.split(" ");
 
-        if(args.length < 1) {
+        if(args.length < 2) {
             return;
         }
 
+        const id = args[1];
+
         switch(args[0].toLowerCase()) {
             case "fetch-group":
-                const group = await mongoDB.find(args[1]);
+                const group = await mongoDB.find(id);
 
                 if(group) {
                     socket.send(JSON.stringify(group));
+                } else {
+
                 }
                 break;
 
-            case "update-group":
+            case "update-description":
+                const description = args.slice(2).join(" ");
+
+                await mongoDB.update({
+                    _id: id
+                }, { $set: {
+                    description: description
+                }});
+                break;
+
+            case "update-votes":
+                break;
+
+            case "update-targets":
+                break;
+
+            case "update-dates":
                 break;
 
             default:
