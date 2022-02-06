@@ -43,9 +43,9 @@ export function createTelegramBot(token: string) {
             let antwort = text.replace("newgroup", "");
             let id = await createGroup(antwort)
             await bot.sendMessage({ chat_id: message.message.chat.id, text: `Neue Gruppe ${antwort} erstellt` })
-            await bot.sendMessage({ chat_id: message.message.chat.id, text: `[Klicke hier auf auf deine Gruppenseite zu kommen](https://localhost:3000/?id=${id})`, parse_mode:"MarkdownV2" })
-            await bot.sendMessage({ chat_id: message.message.chat.id, text: `https://localhost:3000/?id=${id}` })
+            await bot.sendMessage({ chat_id: message.message.chat.id, text: `[Klicke hier um auf deine Gruppenseite zu kommen](http://127.0.0.1:3000/?id=${id})`, parse_mode:"MarkdownV2" })
             console.log(id);
+            console.log(`http://127.0.0.1:3000/?id=${id}`);
             return;
         }
         if(text.startsWith("help")) {

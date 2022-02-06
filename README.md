@@ -62,4 +62,6 @@ Tutorials zum Einarbeiten in die Funktionen von Mongodb
 ```
 deno run --allow-net --allow-read --allow-env app.ts
 ```
+deno test --allow-net --allow-read --allow-env src/database/mongodb-connector.test.ts
 
+deno test --allow-net --allow-read --allow-env src/bot.test.ts
