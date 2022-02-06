@@ -10,8 +10,25 @@ import { MongoDBConnector } from "./database/mongodb-connector.ts";
 // Read MongoDB URL from .env file
 //const MONGO_DB_URL = Deno.env.get("MONGO_DB_URL");
 //if (!MONGO_DB_URL) throw new Error("MONGO_DB_URL is not provided");
+export async function createGroup(name : string){
 
+      const MONGO_DB_URL = Deno.env.get("MONGO_DB_URL");
+      if (!MONGO_DB_URL) throw new Error("MONGO_DB_URL is not provided");
 
+      const mongodb = new MongoDBConnector(MONGO_DB_URL);
+
+      await mongodb.connect();
+
+      let id: Bson.ObjectId | undefined;
+
+      id = await mongodb.insert({
+          name: name,
+          description: "",
+          targets: [],
+          dates: []
+          });
+      return id?.toString();
+}
 export function createTelegramBot(token: string) {
 
     const bot = new TelegramBot(token);
@@ -22,38 +39,14 @@ export function createTelegramBot(token: string) {
 
         console.log(text);
 
-        if(text.startsWith("newgroup")) {
+        if(text.startsWith("newgroup")){
             let antwort = text.replace("newgroup", "");
-
-            const MONGO_DB_URL = Deno.env.get("MONGO_DB_URL");
-            if (!MONGO_DB_URL) throw new Error("MONGO_DB_URL is not provided");
-
-            const mongodb = new MongoDBConnector(MONGO_DB_URL);
-
-            await mongodb.connect();
-
-            let id: Bson.ObjectId | undefined;
-
-            id = await mongodb.insert({
-                name: antwort,
-                description: "",
-                targets: [],
-                dates: []
-                });
-
-
+            let id = await createGroup(antwort)
             await bot.sendMessage({ chat_id: message.message.chat.id, text: `Neue Gruppe ${antwort} erstellt` })
-            await bot.sendMessage({ chat_id: message.message.chat.id, text: '[Klicke hier auf auf deine Gruppenseite zu kommen](https://localhost:3000/?id=${id})', parse_mode:'MarkdownV2' })
-            await bot.sendMessage({ chat_id: message.message.chat.id, text: "https://localhost:3000/?id=${id}" })
+            await bot.sendMessage({ chat_id: message.message.chat.id, text: `[Klicke hier auf auf deine Gruppenseite zu kommen](https://localhost:3000/?id=${id})`, parse_mode:"MarkdownV2" })
+            await bot.sendMessage({ chat_id: message.message.chat.id, text: `https://localhost:3000/?id=${id}` })
             console.log(id);
             return;
-        }
-        if(text.startsWith("info")) {
-
-            await bot.sendMessage({ chat_id: message.message.chat.id, text: `Deine Gruppen:
-            ` })
-            return;
-
         }
         if(text.startsWith("help")) {
 
