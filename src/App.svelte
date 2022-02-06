@@ -1,10 +1,15 @@
 <script>
     import { onMount } from "svelte";
+
     import MapView from "./components/MapView.svelte";
     import Timeline from "./components/Timeline.svelte";
+    import Voting from "./components/Voting.svelte";
 
-    let mapView, timeline, webSocket;
+    let mapView, timeline, voting;
+    let webSocket;
+    let groupId;
 
+    let initial = true;
     let groupName = "Lädt...";
     let description = "Lädt...";
 
@@ -12,12 +17,12 @@
         webSocket = new WebSocket("ws://localhost:3000/ws");
 
         const urlParams = new URLSearchParams(window.location.search);
-        const id = urlParams.get("id"); 
+        groupId = urlParams.get("id"); 
 
-        let initial = true;
+        mapView.create(webSocket, groupId);
 
         webSocket.addEventListener("open", () => {
-            webSocket.send("fetch-group " + id);
+            webSocket.send("fetch-group " + groupId);
         });
 
         webSocket.addEventListener("message", function (event) {
@@ -26,30 +31,29 @@
             }
             initial = false;
 
-            console.log(event.data)
-
             const group = JSON.parse(event.data);
 
             groupName = group.name;
             description = group.description;
 
-            mapView.create();
-            timeline.create();
+            mapView.setTargets(group.targets);
+            voting.create(group.targets, webSocket, groupId);
+            timeline.create(group.dates, webSocket, groupId);
         });
     });
-</script>
 
-<MapView bind:this={mapView}/>
-<Timeline bind:this={timeline}/>
+    function updateDescription() {
+        webSocket.send("update-description " + groupId + " " + description);
+        location.reload();
+    }
+</script>
 
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100&family=Roboto&display=swap');
-
     :global(body) {
         margin: 0px;
         font-family: sans-serif;
     }
-
     header {
         background-color: #1e2427;
         display: inline-flex;
@@ -58,7 +62,6 @@
         height: 65vh;
         color: #fff;
     }
-
     .title {
         font-size: 5rem;
         font-weight: 200;
@@ -66,7 +69,6 @@
         text-transform: uppercase;
         font-family: "Raleway";
     }
-
     .group-name {
         font-size: 5rem;
         margin-top: 0px;
@@ -74,63 +76,53 @@
         text-transform: uppercase;
         font-family: "Roboto";
     }
-
     .small-title {
         font-size: 1.7rem;
         margin-bottom: 20px;
         text-transform: uppercase;
-        font-family: "Raleway";
+        font-family: "Roboto";
     }
-
     .content {
         width: 100%;
         max-width: 1200px;
         margin: auto;
     }
-
     .left {
         width: 50%;
         float: left;
     }
-
     .right {
         width: 50%;
         float: right;
     }
-
     .description {
         background-color: #1e2427;
-        font-family: "Roboto";
-        font-size: 1.5rem;
+        font-family: "Raleway";
+        font-size: 1.2rem;
+        font-weight: 800;
         text-align: justify;
-        color: #fff;
-        padding: 10px;
+        color: #eee;
+        padding: 15px;
         width: 100%;
-        height: 280px;
+        height: 260px;
     }
-
+    .description-save {
+        float: right;
+        color: #ccc;
+    }
+    .description-save:hover {
+        cursor: pointer;
+        color: #eee;
+    }
     .gray-bg {
         width: 100%;
         padding: 50px 0px;
         background-color: #e5e5e5;
-        margin-bottom: 50px;
     }
-
-    .map {
-        width: 100%;
-        height: 420px;
-    }
-
-    .timeline {
-        height: 420px;
-        width: 100%;
-    }
-
     @media only screen and (max-width: 1220px) {
         :global(body) {
             font-size: 12px;
         }
-
         .content {
             margin: 0px 20px;
         }
@@ -146,7 +138,8 @@
         </div>
 
         <div class="right">
-            <textarea class="description">{description}</textarea>
+            <textarea class="description" bind:value={description}></textarea>
+            <p class="description-save" on:click={updateDescription}>Beschreibung speichern</p>
         </div>
     </div>
 </header>
@@ -154,16 +147,15 @@
 
 <div class="gray-bg">
     <div class="content">
-        <div class="map" id="map"></div>
-        <div class="targets">
-            
-        </div>
+        <MapView bind:this={mapView}/>
 
         <h3 class="small-title">Stimme für ein Reiseziel</h3>
+        <div class="targets">
+            <Voting bind:this={voting}/>
+        </div>
     </div>
 </div>
 
 <div class="content">
-    <h3 class="small-title">Wann kann wer?</h3>
-    <div class="timeline" id="timeline"></div>
+    <Timeline bind:this={timeline}/>
 </div>
