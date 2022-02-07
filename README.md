@@ -5,6 +5,8 @@
 ### Urlaubsplaner Webapp
 Ein Urlaubsplaner für Reisegruppen...
 
+![Screenshot der Webseite](screenshot_webseite.jpg?raw=true "Screenshot der Webseite")
+
 Die Webapp wurde im Fach Fallstudie zu dem Zweck entwickelt, lästige Termin und Reisezielabsprachen in einer Gruppe von mehreren Personan allen Alters zu vereinfachen. 
 
 Auf der Seite können Benutzer ihre eigenen Gruppenräume erstellen, Mitglieder hinzufügen und ihren Kalender synchonisieren. So wird die Terminfindung vereinfacht. Anschließend werden automatisch Reiseziele von Kooperationspartnern vorgeschlagen. Allerdings können auch eigene Reseziele eingetragen werden und zur Abstimmung unter den Gruppenmitgliedern freigegeben werden. So wird die Abstimmung auf ein Reiseziel so einfach wie möglich gestaltet.
@@ -62,6 +64,10 @@ Tutorials zum Einarbeiten in die Funktionen von Mongodb
 ```
 deno run --allow-net --allow-read --allow-env app.ts
 ```
+
+Die Seite kann anschließend über einen Link mit der jeweiligen ID aufgerufen werden. Beispielsweise: http://localhost:3000/?id=61f2ba3b0bd8bfe515921217
+
+
 deno test --allow-net --allow-read --allow-env src/database/mongodb-connector.test.ts
 
 deno test --allow-net --allow-read --allow-env src/bot.test.ts
