@@ -19,7 +19,7 @@ Reisegruppenräume auf der Urlaubsplaner Webapp sollen per Telegrambot erstellt 
 ### Vorgehensweise
 Zuallererst muss die Webapp mit Svelte neugeschrieben werden, da sie vorher auf html und CSS basiert war.
 Anschließend wurde der Telegrambot mithilfe des Botfathers initiiert. Dann wurden dem Bot neue Befehle hinzugefügt um später Gruppenräume auf der Webapp zu erstellen.
-Das Backend der Webapp wurde dann mit Mongo von Mongodb erstellt.
+Das Backend der Webapp wurde dann mit Mongo von Mongodb erstellt. Die Kommunikation zwischen Frontend und Backend läuft über Websockets.
 
 ## Einarbeiten in Deno
 Basic Tutorials zu den Funktionen von Deno
