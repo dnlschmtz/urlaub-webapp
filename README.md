@@ -67,7 +67,10 @@ deno run --allow-net --allow-read --allow-env app.ts
 
 Die Seite kann anschließend über einen Link mit der jeweiligen ID aufgerufen werden. Beispielsweise: http://localhost:3000/?id=61f2ba3b0bd8bfe515921217
 
-
+## Testbefehle
+```
 deno test --allow-net --allow-read --allow-env src/database/mongodb-connector.test.ts
-
+```
+```
 deno test --allow-net --allow-read --allow-env src/bot.test.ts
+```
