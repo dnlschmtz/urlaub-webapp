@@ -60,6 +60,9 @@ Tutorials zum Einarbeiten in die Funktionen von Mongodb
 
 -https://www.youtube.com/watch?v=P6gEnVlJPOc
 
+## Open-Source Module
+- https://github.com/dschmtz/Simple-Linear-Regression
+
 ## Zum Starten
 ```
 deno run --allow-net --allow-read --allow-env app.ts
