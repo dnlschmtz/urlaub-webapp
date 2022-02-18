@@ -7,7 +7,10 @@ Ein Urlaubsplaner für Reisegruppen...
 
 ![Screenshot der Webseite](screenshot_webseite.jpg?raw=true "Screenshot der Webseite")
 
-Die Webapp wurde im Fach Fallstudie zu dem Zweck entwickelt, lästige Termin und Reisezielabsprachen in einer Gruppe von mehreren Personan allen Alters zu vereinfachen. 
+Die Webapp wurde im Fach Fallstudie zu dem Zweck entwickelt, lästige Termin und Reisezielabsprachen in einer Gruppe von mehreren Personen allen Alters zu vereinfachen. 
+
+Über den Bot kann eine neue Gruppe erstellt werden:
+https://t.me/travel2gether_bot
 
 Auf der Seite können Benutzer ihre eigenen Gruppenräume erstellen, Mitglieder hinzufügen und ihren Kalender synchonisieren. So wird die Terminfindung vereinfacht. Anschließend werden automatisch Reiseziele von Kooperationspartnern vorgeschlagen. Allerdings können auch eigene Reseziele eingetragen werden und zur Abstimmung unter den Gruppenmitgliedern freigegeben werden. So wird die Abstimmung auf ein Reiseziel so einfach wie möglich gestaltet.
 
